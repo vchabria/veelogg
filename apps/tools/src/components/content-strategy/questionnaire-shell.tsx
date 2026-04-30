@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProgressBar } from "./progress-bar";
 import { QuestionStep } from "./question-step";
@@ -30,7 +30,9 @@ export function QuestionnaireShell({ flowId, onBack, onComplete }: Questionnaire
     completeSession,
   } = useStrategySession(flowId);
 
-  // Create session if one doesn't exist
+  const [showTransition, setShowTransition] = useState(false);
+  const [transitionPart, setTransitionPart] = useState<{ from: string; to: string } | null>(null);
+
   useEffect(() => {
     if (!loading && !session) {
       createSession(flowId);
@@ -44,10 +46,6 @@ export function QuestionnaireShell({ flowId, onBack, onComplete }: Questionnaire
 
   const isFirstQuestion = currentStep === 0;
   const isLastQuestion = currentStep === totalQuestions - 1;
-
-  // Check if we're transitioning between parts
-  const prevQuestion = currentStep > 0 ? questions[currentStep - 1] : null;
-  const isPartTransition = prevQuestion && prevQuestion.partIndex !== currentQuestion?.partIndex;
 
   const handleAnswer = useCallback(
     (value: string) => {
@@ -63,9 +61,24 @@ export function QuestionnaireShell({ flowId, onBack, onComplete }: Questionnaire
       await completeSession();
       if (session) onComplete(session.id);
     } else {
-      setCurrentStep(currentStep + 1);
+      const nextQuestion = questions[currentStep + 1];
+      if (nextQuestion && currentQuestion && nextQuestion.partIndex !== currentQuestion.partIndex) {
+        setTransitionPart({
+          from: currentQuestion.partLabel,
+          to: nextQuestion.partLabel,
+        });
+        setShowTransition(true);
+      } else {
+        setCurrentStep(currentStep + 1);
+      }
     }
-  }, [saveNow, isLastQuestion, completeSession, session, onComplete, setCurrentStep, currentStep]);
+  }, [saveNow, isLastQuestion, completeSession, session, onComplete, setCurrentStep, currentStep, questions, currentQuestion]);
+
+  const handleContinueFromTransition = useCallback(() => {
+    setShowTransition(false);
+    setTransitionPart(null);
+    setCurrentStep(currentStep + 1);
+  }, [setCurrentStep, currentStep]);
 
   const handleBack = useCallback(async () => {
     await saveNow();
@@ -86,8 +99,35 @@ export function QuestionnaireShell({ flowId, onBack, onComplete }: Questionnaire
 
   if (!currentQuestion) return null;
 
+  // Part transition screen
+  if (showTransition && transitionPart) {
+    return (
+      <div className="flex flex-col items-center justify-center py-16 text-center animate-in">
+        <div className="wave-divider-copper w-full max-w-xs mb-8" />
+
+        <Sparkles className="h-8 w-8 text-butter mb-4 animate-float" />
+
+        <p className="text-sm text-muted-foreground mb-2">
+          Nice work on <span className="font-medium text-foreground">{transitionPart.from}</span>
+        </p>
+
+        <h2 className="text-2xl font-display mb-2">
+          Up next: {transitionPart.to}
+        </h2>
+
+        <p className="text-sm text-muted-foreground max-w-sm mb-8">
+          Take a breath. The next section builds on what you just explored.
+        </p>
+
+        <Button onClick={handleContinueFromTransition} className="gap-1.5">
+          Continue <ArrowRight className="h-4 w-4" />
+        </Button>
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-in">
       <div className="flex items-center justify-between">
         <button
           type="button"
@@ -115,16 +155,13 @@ export function QuestionnaireShell({ flowId, onBack, onComplete }: Questionnaire
         totalQuestions={totalQuestions}
       />
 
-      {/* Part transition screen */}
-      {isPartTransition && (
-        <div className="wave-divider" />
-      )}
-
-      <QuestionStep
-        question={currentQuestion}
-        answer={answer}
-        onChange={handleAnswer}
-      />
+      <div key={currentQuestion.id} className="animate-in">
+        <QuestionStep
+          question={currentQuestion}
+          answer={answer}
+          onChange={handleAnswer}
+        />
+      </div>
 
       <div className="flex items-center justify-between pt-4">
         <Button

@@ -5,7 +5,7 @@ import { WorkbookSection } from "./workbook-section";
 import { WORKBOOK_SECTIONS, emptyWorkbookData } from "./flow-data";
 import { useStrategySession } from "@/hooks/use-strategy-session";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Save } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { WorkbookData } from "@/types/content-strategy";
 
 interface WorkbookProps {
@@ -29,7 +29,6 @@ export function Workbook({ onBack, onComplete }: WorkbookProps) {
     return { ...defaults, ...(responses as Partial<WorkbookData>) } as WorkbookData;
   }, [responses]);
 
-  // Ensure session exists
   const ensureSession = useCallback(async () => {
     if (!session) {
       await createSession("workbook");
@@ -58,7 +57,7 @@ export function Workbook({ onBack, onComplete }: WorkbookProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 animate-in">
       <div className="flex items-center justify-between">
         <button
           type="button"
@@ -68,49 +67,42 @@ export function Workbook({ onBack, onComplete }: WorkbookProps) {
           <ArrowLeft className="h-4 w-4" />
           Back
         </button>
-        <div className="flex items-center gap-3">
-          {saving && (
-            <span className="text-xs text-muted-foreground animate-pulse">Saving...</span>
-          )}
-          {session && (
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => saveNow()}
-              className="gap-1.5"
-            >
-              <Save className="h-3.5 w-3.5" />
-              Save
-            </Button>
-          )}
-        </div>
+        {saving && (
+          <span className="text-xs text-muted-foreground animate-pulse">Saving...</span>
+        )}
       </div>
 
       <div>
-        <h1 className="text-3xl font-display">Your Content Strategy Workbook</h1>
+        <p className="text-sm font-medium text-copper tracking-wide uppercase mb-2">
+          Interactive Workbook
+        </p>
+        <h1 className="text-3xl font-display">Your Content Strategy</h1>
         <p className="mt-2 text-muted-foreground">
-          Work through each section at your own pace. Your progress auto-saves.
+          Work through each section at your own pace. Click to expand, and your
+          answers save automatically as you type.
         </p>
       </div>
 
-      <div className="space-y-4">
-        {WORKBOOK_SECTIONS.map((section) => (
-          <WorkbookSection
-            key={section.id}
-            sectionId={section.id}
-            title={section.title}
-            description={section.description}
-            data={workbookData}
-            onUpdate={handleUpdate}
-            onBlur={handleBlur}
-          />
+      <div className="space-y-3">
+        {WORKBOOK_SECTIONS.map((section, i) => (
+          <div key={section.id} style={{ animationDelay: `${i * 50}ms` }} className="animate-in">
+            <WorkbookSection
+              sectionId={section.id}
+              title={section.title}
+              description={section.description}
+              data={workbookData}
+              onUpdate={handleUpdate}
+              onBlur={handleBlur}
+            />
+          </div>
         ))}
       </div>
 
       {session && (
         <div className="flex justify-end pt-4">
-          <Button onClick={() => onComplete(session.id)} size="lg">
+          <Button onClick={() => onComplete(session.id)} size="lg" className="gap-1.5">
             Review &amp; Generate Summary
+            <ArrowRight className="h-4 w-4" />
           </Button>
         </div>
       )}

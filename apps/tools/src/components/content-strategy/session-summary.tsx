@@ -1,11 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { ArrowLeft, Sparkles, PartyPopper } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SummaryResult } from "./summary-result";
-import { STRATEGY_FLOWS, WORKBOOK_SECTIONS } from "./flow-data";
+import { STRATEGY_FLOWS } from "./flow-data";
 import type { StrategyFlowId, StrategySession, WorkbookData } from "@/types/content-strategy";
 
 interface SessionSummaryProps {
@@ -21,7 +21,6 @@ export function SessionSummary({ sessionId, flowId, onBack }: SessionSummaryProp
   const [summary, setSummary] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // Load session data
   useEffect(() => {
     async function load() {
       try {
@@ -90,76 +89,96 @@ export function SessionSummary({ sessionId, flowId, onBack }: SessionSummaryProp
   const responses = session.responses as Record<string, unknown>;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-in">
       <div>
         <button
           type="button"
           onClick={onBack}
-          className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
+          className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
         >
           <ArrowLeft className="h-4 w-4" />
           Back
         </button>
-        <h1 className="text-3xl font-display">Review &amp; Summary</h1>
+
+        <div className="flex items-center gap-3 mb-2">
+          <PartyPopper className="h-6 w-6 text-butter" />
+          <p className="text-sm font-medium text-copper uppercase tracking-wide">
+            You did it
+          </p>
+        </div>
+        <h1 className="text-3xl font-display">Review Your Answers</h1>
         <p className="mt-2 text-muted-foreground">
-          Review your answers below, then optionally generate an AI-powered strategy brief.
+          Everything you wrote, all in one place. Generate an AI brief to turn it into a clear strategy.
         </p>
       </div>
 
-      {/* Display answers */}
-      {flowId === "workbook" ? (
-        <WorkbookReview data={responses as unknown as WorkbookData} />
-      ) : (
-        <ExerciseReview flowId={flowId} responses={responses} />
+      {/* AI Summary — top position for completed sessions */}
+      {summary && (
+        <div className="animate-in">
+          <SummaryResult summary={summary} />
+        </div>
       )}
 
-      {/* AI Summary */}
-      <div className="border-t pt-8 space-y-4">
-        {summary ? (
-          <SummaryResult summary={summary} />
-        ) : (
-          <Card className="border-dashed">
-            <CardContent className="flex flex-col items-center gap-4 py-8">
-              <Sparkles className="h-8 w-8 text-copper" />
-              <div className="text-center">
-                <p className="font-medium">Generate AI Strategy Brief</p>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Claude will analyze your answers and create a personalized content strategy summary.
-                  This counts as one generation.
-                </p>
-              </div>
-              <Button
-                onClick={generateSummary}
-                disabled={generating}
-                className="gap-1.5"
-              >
-                {generating ? (
-                  <>
-                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                    Generating...
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="h-4 w-4" />
-                    Generate Summary
-                  </>
-                )}
-              </Button>
-            </CardContent>
-          </Card>
-        )}
+      {!summary && (
+        <Card className="border-dashed border-copper/20 bg-gradient-to-br from-card to-butter/5">
+          <CardContent className="flex flex-col items-center gap-4 py-10">
+            <div className="rounded-2xl bg-butter/30 p-3">
+              <Sparkles className="h-7 w-7 text-copper" />
+            </div>
+            <div className="text-center max-w-sm">
+              <p className="font-display text-lg">Generate your strategy brief</p>
+              <p className="text-sm text-muted-foreground mt-1.5">
+                AI will read your answers and create a personalized content strategy
+                summary with actionable next steps. Uses 1 generation.
+              </p>
+            </div>
+            <Button
+              onClick={generateSummary}
+              disabled={generating}
+              size="lg"
+              className="gap-1.5 mt-2"
+            >
+              {generating ? (
+                <>
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                  Writing your brief...
+                </>
+              ) : (
+                <>
+                  <Sparkles className="h-4 w-4" />
+                  Generate Brief
+                </>
+              )}
+            </Button>
+          </CardContent>
+        </Card>
+      )}
 
-        {error && (
-          <div className="rounded-xl border border-destructive/20 bg-destructive/5 p-4 text-sm text-destructive">
-            {error}
-          </div>
+      {error && (
+        <div className="rounded-xl border border-destructive/20 bg-destructive/5 p-4 text-sm text-destructive">
+          {error}
+        </div>
+      )}
+
+      {/* Answers review */}
+      <div>
+        <div className="flex items-center gap-2 mb-4">
+          <div className="h-px flex-1 bg-border" />
+          <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground px-3">
+            Your answers
+          </span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
+
+        {flowId === "workbook" ? (
+          <WorkbookReview data={responses as unknown as WorkbookData} />
+        ) : (
+          <ExerciseReview flowId={flowId} responses={responses} />
         )}
       </div>
     </div>
   );
 }
-
-// ─── Review components ───────────────────────────────────────────────────────
 
 function WorkbookReview({ data }: { data: WorkbookData }) {
   if (!data) return null;
@@ -206,21 +225,21 @@ function WorkbookReview({ data }: { data: WorkbookData }) {
   ];
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {sections.map((section) => (
         <Card key={section.title}>
-          <CardHeader>
-            <CardTitle className="text-lg font-display">{section.title}</CardTitle>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base font-display">{section.title}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             {section.items
               .filter((item) => item.value)
               .map((item) => (
                 <div key={item.label}>
-                  <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                  <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
                     {item.label}
                   </p>
-                  <p className="mt-1 text-sm whitespace-pre-wrap">{item.value}</p>
+                  <p className="mt-0.5 text-sm whitespace-pre-wrap leading-relaxed">{item.value}</p>
                 </div>
               ))}
             {section.items.every((item) => !item.value) && (
@@ -230,17 +249,16 @@ function WorkbookReview({ data }: { data: WorkbookData }) {
         </Card>
       ))}
 
-      {/* Pillars */}
       {data?.strategy?.pillars?.some((p) => p.name) && (
         <Card>
-          <CardHeader>
-            <CardTitle className="text-lg font-display">Content Pillars</CardTitle>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base font-display">Content Pillars</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4 sm:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-3">
               {data.strategy.pillars.map((pillar, i) => (
                 pillar.name && (
-                  <div key={i} className="rounded-xl border p-3 space-y-1.5">
+                  <div key={i} className="rounded-xl border border-copper/10 bg-copper/5 p-3 space-y-1.5">
                     <p className="font-medium text-sm text-copper">Pillar {i + 1}: {pillar.name}</p>
                     {pillar.goal && <p className="text-xs"><span className="text-muted-foreground">Goal:</span> {pillar.goal}</p>}
                     {pillar.style && <p className="text-xs"><span className="text-muted-foreground">Style:</span> {pillar.style}</p>}
@@ -267,23 +285,23 @@ function ExerciseReview({
   if (!flow) return null;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {flow.parts.map((partLabel, partIndex) => {
         const partQuestions = flow.questions.filter((q) => q.partIndex === partIndex);
         return (
           <Card key={partLabel}>
-            <CardHeader>
-              <CardTitle className="text-lg font-display">{partLabel}</CardTitle>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-display">{partLabel}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {partQuestions.map((q) => {
                 const answer = responses[q.id] as string;
                 return (
                   <div key={q.id}>
-                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                    <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
                       {q.text}
                     </p>
-                    <p className="mt-1 text-sm whitespace-pre-wrap">
+                    <p className="mt-0.5 text-sm whitespace-pre-wrap leading-relaxed">
                       {answer || <span className="text-muted-foreground italic">Skipped</span>}
                     </p>
                   </div>

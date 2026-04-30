@@ -10,8 +10,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 
 function LoginForm() {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [usePassword, setUsePassword] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") ?? "/";
@@ -33,6 +35,25 @@ function LoginForm() {
       setMessage(error.message);
     } else {
       setMessage("Check your email for a magic link.");
+    }
+    setLoading(false);
+  }
+
+  async function handlePasswordLogin(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+
+    const supabase = createClient();
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      setMessage(error.message);
+    } else {
+      router.push(redirect);
     }
     setLoading(false);
   }
@@ -73,7 +94,7 @@ function LoginForm() {
           </div>
         </div>
 
-        <form onSubmit={handleMagicLink} className="space-y-3">
+        <form onSubmit={usePassword ? handlePasswordLogin : handleMagicLink} className="space-y-3">
           <Input
             type="email"
             placeholder="you@example.com"
@@ -81,9 +102,25 @@ function LoginForm() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+          {usePassword && (
+            <Input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          )}
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Sending..." : "Send magic link"}
+            {loading ? "Signing in..." : usePassword ? "Sign in" : "Send magic link"}
           </Button>
+          <button
+            type="button"
+            onClick={() => setUsePassword(!usePassword)}
+            className="w-full text-xs text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {usePassword ? "Use magic link instead" : "Sign in with password"}
+          </button>
         </form>
 
         {message && (

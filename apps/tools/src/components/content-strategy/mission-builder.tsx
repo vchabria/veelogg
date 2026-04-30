@@ -24,54 +24,63 @@ export function MissionBuilder({
   return (
     <div className="space-y-4">
       <p className="text-sm text-muted-foreground">
-        Fill in the blanks to build your mission statement:
+        Fill in the blanks to craft your mission statement:
       </p>
 
-      <div className="rounded-xl border bg-butter/10 p-4 space-y-3">
-        <div className="flex flex-wrap items-center gap-2 text-sm leading-relaxed">
-          <Input
-            value={creatorName}
-            onChange={(e) => onChange("creatorName", e.target.value)}
-            placeholder="Your name"
-            className="w-36 inline-flex h-8 text-sm"
-          />
-          <span>is a creator on</span>
-          <Input
-            value={platform}
-            onChange={(e) => onChange("platform", e.target.value)}
-            placeholder="platform"
-            className="w-32 inline-flex h-8 text-sm"
-          />
-          <span>who creates content about</span>
-          <Input
-            value={contentAbout}
-            onChange={(e) => onChange("contentAbout", e.target.value)}
-            placeholder="what"
-            className="w-40 inline-flex h-8 text-sm"
-          />
-          <span>that helps</span>
-          <Input
-            value={helpsWho}
-            onChange={(e) => onChange("helpsWho", e.target.value)}
-            placeholder="who"
-            className="w-36 inline-flex h-8 text-sm"
-          />
-          <span>with</span>
-          <Input
-            value={helpsWithProblems}
-            onChange={(e) => onChange("helpsWithProblems", e.target.value)}
-            placeholder="what problems"
-            className="w-44 inline-flex h-8 text-sm"
-          />
+      <div className="rounded-xl border border-butter/30 bg-butter/10 p-4 sm:p-5 space-y-4">
+        {/* Mobile-friendly stacked layout */}
+        <div className="space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+            <Input
+              value={creatorName}
+              onChange={(e) => onChange("creatorName", e.target.value)}
+              placeholder="Your name"
+              className="sm:w-40 h-9 text-sm border-copper/15"
+            />
+            <span className="text-sm text-muted-foreground shrink-0">is a creator on</span>
+            <Input
+              value={platform}
+              onChange={(e) => onChange("platform", e.target.value)}
+              placeholder="platform"
+              className="sm:w-36 h-9 text-sm border-copper/15"
+            />
+          </div>
+
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+            <span className="text-sm text-muted-foreground shrink-0">who creates content about</span>
+            <Input
+              value={contentAbout}
+              onChange={(e) => onChange("contentAbout", e.target.value)}
+              placeholder="what topics"
+              className="sm:w-44 h-9 text-sm border-copper/15"
+            />
+          </div>
+
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+            <span className="text-sm text-muted-foreground shrink-0">that helps</span>
+            <Input
+              value={helpsWho}
+              onChange={(e) => onChange("helpsWho", e.target.value)}
+              placeholder="who"
+              className="sm:w-40 h-9 text-sm border-copper/15"
+            />
+            <span className="text-sm text-muted-foreground shrink-0">with</span>
+            <Input
+              value={helpsWithProblems}
+              onChange={(e) => onChange("helpsWithProblems", e.target.value)}
+              placeholder="what problems"
+              className="sm:flex-1 h-9 text-sm border-copper/15"
+            />
+          </div>
         </div>
       </div>
 
       {statement && (
-        <div className="rounded-xl border border-copper/20 bg-card p-4">
-          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-1">
-            Your Mission Statement
+        <div className="rounded-xl border border-copper/15 bg-copper/5 p-4 transition-all">
+          <p className="text-[11px] font-medium uppercase tracking-wider text-copper mb-1.5">
+            Your Mission
           </p>
-          <p className="text-sm font-display text-foreground">{statement}</p>
+          <p className="text-sm font-display leading-relaxed text-foreground">{statement}</p>
         </div>
       )}
     </div>

@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { StrategyFlowId, StrategySession } from "@/types/content-strategy";
 
+const LS_PREFIX = "veelogg-strategy-";
+
 interface UseStrategySessionReturn {
   session: StrategySession | null;
   loading: boolean;
@@ -16,6 +18,26 @@ interface UseStrategySessionReturn {
   completeSession: () => Promise<void>;
 }
 
+function getLocalData(flow: StrategyFlowId) {
+  try {
+    const raw = localStorage.getItem(`${LS_PREFIX}${flow}`);
+    if (raw) return JSON.parse(raw) as { responses: Record<string, unknown>; step: number };
+  } catch { /* ignore */ }
+  return null;
+}
+
+function setLocalData(flow: StrategyFlowId, responses: Record<string, unknown>, step: number) {
+  try {
+    localStorage.setItem(`${LS_PREFIX}${flow}`, JSON.stringify({ responses, step }));
+  } catch { /* ignore — storage full or unavailable */ }
+}
+
+function clearLocalData(flow: StrategyFlowId) {
+  try {
+    localStorage.removeItem(`${LS_PREFIX}${flow}`);
+  } catch { /* ignore */ }
+}
+
 export function useStrategySession(flow: StrategyFlowId): UseStrategySessionReturn {
   const [session, setSession] = useState<StrategySession | null>(null);
   const [loading, setLoading] = useState(true);
@@ -23,9 +45,8 @@ export function useStrategySession(flow: StrategyFlowId): UseStrategySessionRetu
   const [responses, setResponses] = useState<Record<string, unknown>>({});
   const [currentStep, setCurrentStep] = useState(0);
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const pendingSave = useRef(false);
 
-  // Load existing session on mount
+  // Load existing session on mount, with localStorage fallback
   useEffect(() => {
     async function load() {
       try {
@@ -34,12 +55,35 @@ export function useStrategySession(flow: StrategyFlowId): UseStrategySessionRetu
           const data = await res.json();
           if (data.session) {
             setSession(data.session);
-            setResponses(data.session.responses ?? {});
-            setCurrentStep(data.session.current_step ?? 0);
+
+            // Merge: prefer localStorage if it has newer data
+            const local = getLocalData(flow);
+            const serverResponses = data.session.responses ?? {};
+            const localResponses = local?.responses ?? {};
+
+            // Use whichever has more keys (proxy for "more recent edits")
+            const serverKeys = Object.keys(serverResponses).length;
+            const localKeys = Object.keys(localResponses).length;
+
+            if (localKeys > serverKeys) {
+              setResponses(localResponses);
+              setCurrentStep(local?.step ?? data.session.current_step ?? 0);
+            } else {
+              setResponses(serverResponses);
+              setCurrentStep(data.session.current_step ?? 0);
+              // Sync server data to localStorage
+              setLocalData(flow, serverResponses, data.session.current_step ?? 0);
+            }
+            return;
           }
         }
       } catch {
-        // silently fail
+        // Server unreachable — try localStorage
+        const local = getLocalData(flow);
+        if (local) {
+          setResponses(local.responses);
+          setCurrentStep(local.step);
+        }
       } finally {
         setLoading(false);
       }
@@ -60,31 +104,32 @@ export function useStrategySession(flow: StrategyFlowId): UseStrategySessionRetu
         if (res.ok) {
           const result = await res.json();
           setSession(result.session);
+          clearLocalData(flow); // Server is up to date, clear local buffer
         }
       } catch {
-        // silently fail — data is buffered in state
+        // Server save failed — localStorage is the backup
       } finally {
         setSaving(false);
-        pendingSave.current = false;
       }
     },
-    []
+    [flow]
   );
 
   // Debounced auto-save (500ms)
   const scheduleSave = useCallback(
     (data: Record<string, unknown>, step: number) => {
+      // Always save to localStorage immediately
+      setLocalData(flow, data, step);
+
       if (!session) return;
-      pendingSave.current = true;
       if (saveTimer.current) clearTimeout(saveTimer.current);
       saveTimer.current = setTimeout(() => {
         saveToServer(session.id, data, step);
       }, 500);
     },
-    [session, saveToServer]
+    [flow, session, saveToServer]
   );
 
-  // Update responses and schedule save
   const updateResponses = useCallback(
     (patch: Record<string, unknown>) => {
       setResponses((prev) => {
@@ -96,7 +141,6 @@ export function useStrategySession(flow: StrategyFlowId): UseStrategySessionRetu
     [scheduleSave, currentStep]
   );
 
-  // Update step and schedule save
   const setStepAndSave = useCallback(
     (step: number) => {
       setCurrentStep(step);
@@ -107,14 +151,13 @@ export function useStrategySession(flow: StrategyFlowId): UseStrategySessionRetu
     [session, responses, scheduleSave]
   );
 
-  // Force immediate save
   const saveNow = useCallback(async () => {
     if (!session) return;
     if (saveTimer.current) clearTimeout(saveTimer.current);
+    setLocalData(flow, responses, currentStep);
     await saveToServer(session.id, responses, currentStep);
-  }, [session, responses, currentStep, saveToServer]);
+  }, [flow, session, responses, currentStep, saveToServer]);
 
-  // Create a new session
   const createSession = useCallback(async (flowId: StrategyFlowId) => {
     try {
       const res = await fetch("/api/content-strategy/session", {
@@ -125,8 +168,16 @@ export function useStrategySession(flow: StrategyFlowId): UseStrategySessionRetu
       if (res.ok) {
         const data = await res.json();
         setSession(data.session);
-        setResponses(data.session.responses ?? {});
-        setCurrentStep(data.session.current_step ?? 0);
+
+        // Restore from localStorage if we had buffered data
+        const local = getLocalData(flowId);
+        if (local && Object.keys(local.responses).length > 0) {
+          setResponses(local.responses);
+          setCurrentStep(local.step);
+        } else {
+          setResponses(data.session.responses ?? {});
+          setCurrentStep(data.session.current_step ?? 0);
+        }
         return data.session as StrategySession;
       }
     } catch {
@@ -135,7 +186,6 @@ export function useStrategySession(flow: StrategyFlowId): UseStrategySessionRetu
     return null;
   }, []);
 
-  // Mark session as completed
   const completeSession = useCallback(async () => {
     if (!session) return;
     if (saveTimer.current) clearTimeout(saveTimer.current);
@@ -154,15 +204,15 @@ export function useStrategySession(flow: StrategyFlowId): UseStrategySessionRetu
       if (res.ok) {
         const data = await res.json();
         setSession(data.session);
+        clearLocalData(flow);
       }
     } catch {
       // silently fail
     } finally {
       setSaving(false);
     }
-  }, [session, responses, currentStep]);
+  }, [flow, session, responses, currentStep]);
 
-  // Cleanup timer on unmount
   useEffect(() => {
     return () => {
       if (saveTimer.current) clearTimeout(saveTimer.current);
