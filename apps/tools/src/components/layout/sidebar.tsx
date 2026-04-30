@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { TOOLS } from "@/lib/constants";
 import { Badge } from "@/components/ui/badge";
-import { Zap, FileText, Repeat, Target, BarChart3, Compass } from "lucide-react";
+import { Zap, FileText, Repeat, Target, BarChart3, Compass, Briefcase } from "lucide-react";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Zap,
@@ -14,6 +14,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Target,
   BarChart3,
   Compass,
+  Briefcase,
 };
 
 export function Sidebar() {

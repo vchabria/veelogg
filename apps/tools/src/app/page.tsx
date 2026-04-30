@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { Zap, FileText, Repeat, Target, BarChart3, Compass, ArrowRight } from "lucide-react";
+import { Zap, FileText, Repeat, Target, BarChart3, Compass, Briefcase, ArrowRight } from "lucide-react";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Zap,
@@ -13,6 +13,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Target,
   BarChart3,
   Compass,
+  Briefcase,
 };
 
 export default function ToolsLandingPage() {

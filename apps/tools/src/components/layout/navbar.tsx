@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useUser } from "@/hooks/use-user";
 import { UserMenu } from "./user-menu";
+import { NotificationBell } from "./notification-bell";
 import { Button } from "@/components/ui/button";
 
 export function Navbar() {
@@ -26,7 +27,10 @@ export function Navbar() {
             Pricing
           </Link>
           {loading ? null : user ? (
-            <UserMenu email={user.email ?? ""} plan={profile?.plan ?? "free"} />
+            <>
+              <NotificationBell />
+              <UserMenu email={user.email ?? ""} plan={profile?.plan ?? "free"} />
+            </>
           ) : (
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="sm" asChild>

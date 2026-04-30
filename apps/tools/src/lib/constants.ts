@@ -46,6 +46,13 @@ export const TOOLS = [
     status: "live" as const,
     icon: "Compass",
   },
+  {
+    slug: "brand-hub",
+    name: "Brand Hub",
+    description: "Track brand profiles, manage partnership deals, and monitor deliverables through a pipeline.",
+    status: "live" as const,
+    icon: "Briefcase",
+  },
 ] as const;
 
 export const HOOK_TYPES = [

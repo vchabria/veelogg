@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
-const protectedPaths = ["/hook-generator", "/script-writer", "/repurpose", "/brand-pitch", "/brand-intel", "/content-strategy", "/account"];
+const protectedPaths = ["/hook-generator", "/script-writer", "/repurpose", "/brand-pitch", "/brand-intel", "/content-strategy", "/brand-hub", "/account"];
 
 export async function middleware(request: NextRequest) {
   const hostname = request.headers.get("host") ?? "";

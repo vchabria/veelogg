@@ -1,12 +1,14 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { WorkbookSection } from "./workbook-section";
 import { WORKBOOK_SECTIONS, emptyWorkbookData } from "./flow-data";
 import { useStrategySession } from "@/hooks/use-strategy-session";
 import { Button } from "@/components/ui/button";
+import { BrandProfileSelect } from "@/components/shared/brand-profile-select";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { WorkbookData } from "@/types/content-strategy";
+import type { BrandProfile } from "@/types/brand-hub";
 
 interface WorkbookProps {
   onBack: () => void;
@@ -24,6 +26,8 @@ export function Workbook({ onBack, onComplete }: WorkbookProps) {
     createSession,
   } = useStrategySession("workbook");
 
+  const [brandApplied, setBrandApplied] = useState(false);
+
   const workbookData = useMemo(() => {
     const defaults = emptyWorkbookData();
     return { ...defaults, ...(responses as Partial<WorkbookData>) } as WorkbookData;
@@ -34,6 +38,39 @@ export function Workbook({ onBack, onComplete }: WorkbookProps) {
       await createSession("workbook");
     }
   }, [session, createSession]);
+
+  const handleBrandSelect = useCallback(
+    async (profile: BrandProfile | null) => {
+      if (!profile || brandApplied) return;
+      setBrandApplied(true);
+      await ensureSession();
+      const patch: Partial<WorkbookData> = {};
+      if (profile.niche && !workbookData.mission.contentAbout) {
+        patch.mission = { ...workbookData.mission, contentAbout: profile.niche };
+      }
+      if (profile.audience && !workbookData.mission.targetAudience) {
+        patch.mission = { ...(patch.mission ?? workbookData.mission), targetAudience: profile.audience };
+      }
+      if (profile.platforms?.length && (!workbookData.strategy.platforms || workbookData.strategy.platforms.length === 0)) {
+        const platformLabels: Record<string, string> = {
+          youtube: "YouTube",
+          tiktok: "TikTok",
+          instagram: "Instagram",
+          twitter: "Twitter/X",
+          linkedin: "LinkedIn",
+          other: "Other",
+        };
+        patch.strategy = {
+          ...workbookData.strategy,
+          platforms: profile.platforms.map((p) => platformLabels[p] ?? p),
+        };
+      }
+      if (Object.keys(patch).length > 0) {
+        updateResponses(patch as Record<string, unknown>);
+      }
+    },
+    [brandApplied, ensureSession, workbookData, updateResponses]
+  );
 
   const handleUpdate = useCallback(
     async (patch: Partial<WorkbookData>) => {
@@ -82,6 +119,8 @@ export function Workbook({ onBack, onComplete }: WorkbookProps) {
           answers save automatically as you type.
         </p>
       </div>
+
+      <BrandProfileSelect onSelect={handleBrandSelect} />
 
       <div className="space-y-3">
         {WORKBOOK_SECTIONS.map((section, i) => (

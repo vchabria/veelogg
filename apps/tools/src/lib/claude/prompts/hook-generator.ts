@@ -28,16 +28,35 @@ VOICE MATCHING (when creator captions are provided):
 
 Return EXACTLY 20 hooks: 2 per taxonomy. Return them as a JSON array.`;
 
+export interface BrandContext {
+  voice?: string;
+  audience?: string;
+  platforms?: string[];
+}
+
 export function buildHookGeneratorUserPrompt(
   niche: string,
   product: string,
   tone?: string,
-  scrapedContext?: string
+  scrapedContext?: string,
+  brandContext?: BrandContext
 ): string {
   let prompt = `Generate 20 hooks for this creator:
 
 **Niche**: ${niche}
 **Product/Topic**: ${product}${tone ? `\n**Tone**: ${tone}` : ""}`;
+
+  if (brandContext) {
+    if (brandContext.voice) {
+      prompt += `\n**Brand Voice**: ${brandContext.voice}`;
+    }
+    if (brandContext.audience) {
+      prompt += `\n**Target Audience**: ${brandContext.audience}`;
+    }
+    if (brandContext.platforms?.length) {
+      prompt += `\n**Active Platforms**: ${brandContext.platforms.join(", ")}`;
+    }
+  }
 
   if (scrapedContext) {
     prompt += `

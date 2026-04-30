@@ -1,5 +1,5 @@
 export type Plan = "free" | "pro";
-export type ToolName = "hook-generator" | "script-writer" | "repurpose" | "brand-pitch" | "brand-intel" | "content-strategy";
+export type ToolName = "hook-generator" | "script-writer" | "repurpose" | "brand-pitch" | "brand-intel" | "content-strategy" | "brand-hub";
 export type SubscriptionStatus = "active" | "canceled" | "past_due" | "trialing" | "incomplete";
 
 export interface Profile {

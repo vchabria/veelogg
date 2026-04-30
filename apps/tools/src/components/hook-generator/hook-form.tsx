@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Zap, ChevronDown, ChevronUp, Instagram } from "lucide-react";
+import { BrandProfileSelect } from "@/components/shared/brand-profile-select";
 import type { GenerateHooksInput } from "@/types/hooks";
+import type { BrandProfile } from "@/types/brand-hub";
 
 interface HookFormProps {
   onSubmit: (input: GenerateHooksInput) => void;
@@ -18,6 +20,15 @@ export function HookForm({ onSubmit, loading, disabled, hasSocialHandles }: Hook
   const [niche, setNiche] = useState("");
   const [product, setProduct] = useState("");
   const [tone, setTone] = useState("");
+  const [brandProfile, setBrandProfile] = useState<BrandProfile | null>(null);
+
+  function handleBrandSelect(profile: BrandProfile | null) {
+    setBrandProfile(profile);
+    if (profile) {
+      if (profile.niche && !niche) setNiche(profile.niche);
+      if (profile.voice && !tone) setTone(profile.voice);
+    }
+  }
   const [instagramHandle, setInstagramHandle] = useState("");
   const [tiktokHandle, setTiktokHandle] = useState("");
   const [showSocials, setShowSocials] = useState(false);
@@ -27,17 +38,30 @@ export function HookForm({ onSubmit, loading, disabled, hasSocialHandles }: Hook
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!niche.trim() || !product.trim()) return;
+    const brandContext = brandProfile
+      ? {
+          voice: brandProfile.voice || undefined,
+          audience: brandProfile.audience || undefined,
+          platforms: brandProfile.platforms?.length
+            ? brandProfile.platforms
+            : undefined,
+        }
+      : undefined;
+
     onSubmit({
       niche: niche.trim(),
       product: product.trim(),
       tone: tone.trim() || undefined,
       instagramHandle: instagramHandle.trim() || undefined,
       tiktokHandle: tiktokHandle.trim() || undefined,
+      brandContext,
     });
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <BrandProfileSelect onSelect={handleBrandSelect} />
+
       <div className="space-y-2">
         <label htmlFor="niche" className="text-sm font-medium">
           Niche

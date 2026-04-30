@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const { niche, product, tone, instagramHandle, tiktokHandle } = body;
+    const { niche, product, tone, instagramHandle, tiktokHandle, brandContext } = body;
 
     if (!niche || !product) {
       return NextResponse.json(
@@ -80,7 +80,7 @@ export async function POST(request: Request) {
         { role: "system", content: HOOK_GENERATOR_SYSTEM },
         {
           role: "user",
-          content: buildHookGeneratorUserPrompt(niche, product, tone, scrapedContext || undefined),
+          content: buildHookGeneratorUserPrompt(niche, product, tone, scrapedContext || undefined, brandContext),
         },
       ],
     });

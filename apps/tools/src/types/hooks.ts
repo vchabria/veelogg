@@ -22,6 +22,11 @@ export interface GenerateHooksInput {
   tone?: string;
   instagramHandle?: string;
   tiktokHandle?: string;
+  brandContext?: {
+    voice?: string;
+    audience?: string;
+    platforms?: string[];
+  };
 }
 
 export interface ScrapeResult {
