@@ -31,7 +31,7 @@ export function CalendarHeader({
         <Button variant="ghost" size="icon" onClick={onPrevMonth}>
           <ChevronLeft className="h-4 w-4" />
         </Button>
-        <h3 className="text-lg font-display font-semibold min-w-[180px] text-center">
+        <h3 className="text-xl font-display font-semibold min-w-[180px] text-center">
           {MONTH_NAMES[month]} {year}
         </h3>
         <Button variant="ghost" size="icon" onClick={onNextMonth}>
@@ -44,7 +44,7 @@ export function CalendarHeader({
         variant="outline"
         onClick={onSuggest}
         disabled={suggestingLoading}
-        className="text-copper border-copper/20 hover:bg-copper/5"
+        className="text-copper border-copper/20 hover:bg-copper/5 rounded-full"
       >
         {suggestingLoading ? (
           <>

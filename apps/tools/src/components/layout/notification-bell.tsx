@@ -48,14 +48,14 @@ export function NotificationBell() {
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 top-full z-50 mt-1 w-80 rounded-xl border bg-card shadow-warm-lg">
+          <div className="absolute right-0 top-full z-50 mt-2 w-80 rounded-2xl border-0 bg-card shadow-warm-lg">
             {/* Header */}
-            <div className="flex items-center justify-between border-b px-4 py-3">
-              <p className="text-sm font-semibold">Notifications</p>
+            <div className="flex items-center justify-between border-b border-border/30 px-4 py-3">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-copper/60">Notifications</p>
               {unreadCount > 0 && (
                 <button
                   onClick={handleMarkAllRead}
-                  className="text-xs text-copper hover:underline"
+                  className="text-[11px] font-semibold uppercase tracking-[0.15em] text-copper hover:text-copper/80"
                 >
                   Mark all read
                 </button>

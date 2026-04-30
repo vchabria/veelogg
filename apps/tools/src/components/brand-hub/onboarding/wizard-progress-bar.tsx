@@ -27,7 +27,7 @@ export function WizardProgressBar({ currentStep }: WizardProgressBarProps) {
             {i > 0 && (
               <div
                 className={cn(
-                  "h-px w-8 transition-colors",
+                  "h-px w-10 transition-colors",
                   isComplete ? "bg-copper" : "bg-border"
                 )}
               />

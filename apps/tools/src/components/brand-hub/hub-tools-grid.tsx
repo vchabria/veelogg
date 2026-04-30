@@ -50,11 +50,11 @@ interface HubToolsGridProps {
 
 export function HubToolsGrid({ profileId }: HubToolsGridProps) {
   return (
-    <div className="space-y-4">
-      <p className="text-sm text-muted-foreground">
+    <div className="space-y-6">
+      <p className="text-sm text-muted-foreground/70">
         Open any tool with your brand profile pre-loaded.
       </p>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-5 sm:grid-cols-2">
         {TOOLS.map((tool) => {
           const Icon = tool.icon;
           const isComingSoon = tool.status === "coming-soon";
@@ -62,16 +62,16 @@ export function HubToolsGrid({ profileId }: HubToolsGridProps) {
           return isComingSoon ? (
             <Card
               key={tool.slug}
-              className="opacity-60 cursor-default"
+              className="opacity-50 cursor-default border-0 shadow-warm/50"
             >
-              <CardContent className="flex items-start gap-4 p-5">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted">
+              <CardContent className="flex items-start gap-4 p-7">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted/60">
                   <Icon className="h-5 w-5 text-muted-foreground" />
                 </div>
                 <div className="space-y-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <p className="text-sm font-medium">{tool.name}</p>
-                    <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
+                    <Badge variant="secondary" className="text-[10px] px-1.5 py-0 bg-muted/60">
                       Soon
                     </Badge>
                   </div>
@@ -81,8 +81,8 @@ export function HubToolsGrid({ profileId }: HubToolsGridProps) {
             </Card>
           ) : (
             <Link key={tool.slug} href={`/${tool.slug}?profileId=${profileId}`}>
-              <Card className="cursor-pointer transition-all duration-200 hover:shadow-warm-lg hover:-translate-y-0.5">
-                <CardContent className="flex items-start gap-4 p-5">
+              <Card className="cursor-pointer border-0 shadow-warm transition-all duration-200 hover:shadow-warm-lg hover:-translate-y-0.5">
+                <CardContent className="flex items-start gap-4 p-7">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-copper/10">
                     <Icon className="h-5 w-5 text-copper" />
                   </div>

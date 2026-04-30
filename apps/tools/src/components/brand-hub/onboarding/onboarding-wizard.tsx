@@ -17,11 +17,11 @@ export function OnboardingWizard({ onComplete, onCancel }: OnboardingWizardProps
   const wizard = useOnboardingWizard(onComplete);
 
   return (
-    <Card className="border-copper/15">
-      <CardHeader>
+    <Card className="border-0 shadow-warm">
+      <CardHeader className="p-7 pb-4">
         <WizardProgressBar currentStep={wizard.step} />
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-7 pb-7">
         {wizard.step === "handles" && (
           <WizardStepHandles
             instagramHandle={wizard.instagramHandle}

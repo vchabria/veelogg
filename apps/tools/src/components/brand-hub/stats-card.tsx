@@ -12,9 +12,9 @@ interface StatsCardProps {
 
 export function StatsCard({ icon, value, label, className }: StatsCardProps) {
   return (
-    <Card className={cn("border-copper/10", className)}>
-      <CardContent className="flex items-center gap-4 p-6">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-copper/10">
+    <Card className={cn("border-0 shadow-warm", className)}>
+      <CardContent className="flex items-center gap-4 p-7">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-copper/10">
           {icon}
         </div>
         <div>

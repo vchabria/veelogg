@@ -37,7 +37,7 @@ export function WizardStepHandles({
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-1">
-        <h2 className="text-xl font-display font-semibold">Connect your socials</h2>
+        <h2 className="text-2xl font-display font-semibold">Connect your socials</h2>
         <p className="text-sm text-muted-foreground">
           Enter at least one handle. We&apos;ll scrape your top posts and use AI to analyze your brand identity.
         </p>

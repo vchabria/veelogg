@@ -32,7 +32,7 @@ export function ProfileHubHeader({
             onClick={() => setDropdownOpen(!dropdownOpen)}
             className="flex items-center gap-2 group"
           >
-            <h1 className="text-2xl font-display font-bold tracking-tight">
+            <h1 className="text-3xl font-display font-bold tracking-tight">
               {profile.name}
             </h1>
             <ChevronDown className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
@@ -41,7 +41,7 @@ export function ProfileHubHeader({
           {dropdownOpen && (
             <>
               <div className="fixed inset-0 z-40" onClick={() => setDropdownOpen(false)} />
-              <div className="absolute left-0 top-full z-50 mt-1 w-64 rounded-xl border bg-card p-1 shadow-warm-lg">
+              <div className="absolute left-0 top-full z-50 mt-2 w-64 rounded-2xl border-0 bg-card p-1.5 shadow-warm-lg">
                 {profiles.map((p) => (
                   <button
                     key={p.id}
@@ -67,9 +67,9 @@ export function ProfileHubHeader({
 
         {/* Niche + platforms */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-sm text-muted-foreground">{profile.niche}</span>
+          <span className="text-sm text-muted-foreground/70">{profile.niche}</span>
           {profile.platforms.map((p) => (
-            <Badge key={p} variant="secondary" className="text-[11px] px-2 py-0.5">
+            <Badge key={p} variant="secondary" className="text-[11px] px-2.5 py-0.5 bg-copper/5 text-copper/70 border-copper/10">
               {PLATFORM_LABELS[p]}
             </Badge>
           ))}

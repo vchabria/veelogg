@@ -33,12 +33,14 @@ export function CalendarSuggestionPanel({
   if (suggestions.length === 0) return null;
 
   return (
-    <Card className="border-butter/30 bg-butter/5">
-      <CardHeader className="pb-3">
+    <Card className="border-0 bg-butter/5 shadow-warm">
+      <CardHeader className="pb-3 p-7">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-amber-600" />
-            <CardTitle className="text-base">AI Content Suggestions</CardTitle>
+            <CardTitle className="text-[11px] font-semibold uppercase tracking-[0.2em] text-copper/60">
+              AI Content Suggestions
+            </CardTitle>
           </div>
           <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8">
             <X className="h-4 w-4" />
@@ -48,11 +50,11 @@ export function CalendarSuggestionPanel({
           Accept suggestions to add them to your calendar.
         </p>
       </CardHeader>
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-3 px-7 pb-7">
         {suggestions.map((s, i) => (
           <div
             key={i}
-            className="flex items-start gap-3 rounded-lg border bg-card p-3"
+            className="flex items-start gap-3 rounded-xl border-0 bg-card shadow-warm p-4"
           >
             <div className="flex-1 min-w-0 space-y-1">
               <p className="text-sm font-medium">{s.title}</p>

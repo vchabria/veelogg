@@ -98,8 +98,8 @@ export function CalendarItemForm({
   }
 
   return (
-    <Card className="border-copper/15">
-      <CardHeader className="pb-3">
+    <Card className="border-0 shadow-warm">
+      <CardHeader className="pb-3 p-7">
         <div className="flex items-center justify-between">
           <CardTitle className="text-base">
             {isEdit ? "Edit Item" : "New Calendar Item"}
@@ -109,10 +109,10 @@ export function CalendarItemForm({
           </Button>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-7 pb-7">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label className="text-[13px] font-medium">
+            <label className="text-[12px] font-medium text-muted-foreground">
               Title <span className="text-destructive">*</span>
             </label>
             <Input
@@ -126,7 +126,7 @@ export function CalendarItemForm({
 
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
-              <label className="text-[13px] font-medium">Date</label>
+              <label className="text-[12px] font-medium text-muted-foreground">Date</label>
               <Input
                 type="date"
                 value={scheduledDate}
@@ -136,7 +136,7 @@ export function CalendarItemForm({
               />
             </div>
             <div className="space-y-2">
-              <label className="text-[13px] font-medium">Platform</label>
+              <label className="text-[12px] font-medium text-muted-foreground">Platform</label>
               <select
                 value={platform}
                 onChange={(e) => setPlatform(e.target.value)}
@@ -152,7 +152,7 @@ export function CalendarItemForm({
 
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
-              <label className="text-[13px] font-medium">Status</label>
+              <label className="text-[12px] font-medium text-muted-foreground">Status</label>
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value as CalendarItemStatus)}
@@ -164,7 +164,7 @@ export function CalendarItemForm({
               </select>
             </div>
             <div className="space-y-2">
-              <label className="text-[13px] font-medium">Content Type</label>
+              <label className="text-[12px] font-medium text-muted-foreground">Content Type</label>
               <select
                 value={contentType}
                 onChange={(e) => setContentType(e.target.value as ContentType | "")}

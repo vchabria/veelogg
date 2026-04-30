@@ -177,7 +177,7 @@ export function ContentCalendarTab({ profileId }: ContentCalendarTabProps) {
       <div className="hidden sm:block">
         <div className="grid grid-cols-7 gap-1">
           {DAY_LABELS.map((d) => (
-            <div key={d} className="text-center text-xs font-medium text-muted-foreground py-2">
+            <div key={d} className="text-center text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground/60 py-2">
               {d}
             </div>
           ))}
@@ -206,7 +206,7 @@ export function ContentCalendarTab({ profileId }: ContentCalendarTabProps) {
             <button
               key={item.id}
               onClick={() => setFormMode({ type: "edit", item })}
-              className="flex w-full items-center gap-3 rounded-xl border p-3 text-left hover:bg-accent/50 transition-colors"
+              className="flex w-full items-center gap-3 rounded-2xl border-0 shadow-warm p-4 text-left hover:shadow-warm-lg transition-all duration-200"
             >
               <span className="text-xs font-medium text-copper shrink-0 w-12">
                 {new Date(item.scheduled_date + "T00:00:00").toLocaleDateString("en-US", {

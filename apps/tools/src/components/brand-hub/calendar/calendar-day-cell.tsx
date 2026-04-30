@@ -34,8 +34,8 @@ export function CalendarDayCell({
   return (
     <div
       className={cn(
-        "min-h-[100px] rounded-lg border p-1.5 transition-colors group",
-        isToday ? "border-copper/30 bg-copper/5" : "border-border/50 hover:border-border"
+        "min-h-[100px] rounded-lg border p-2 transition-colors group",
+        isToday ? "border-copper/20 bg-copper/5 shadow-warm" : "border-border/30 hover:border-border/50"
       )}
     >
       <div className="flex items-center justify-between mb-1">

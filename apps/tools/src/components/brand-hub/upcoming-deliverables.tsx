@@ -37,11 +37,13 @@ export function UpcomingDeliverables({
     });
 
   return (
-    <Card className="border-copper/10">
-      <CardHeader>
-        <CardTitle className="text-lg">Upcoming Deliverables</CardTitle>
+    <Card className="border-0 shadow-warm">
+      <CardHeader className="p-7 pb-4">
+        <CardTitle className="text-[11px] font-semibold uppercase tracking-[0.2em] text-copper/60">
+          Upcoming Deliverables
+        </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-7 pb-7">
         {upcoming.length === 0 ? (
           <p className="text-sm text-muted-foreground">
             No upcoming deliverables
@@ -54,7 +56,7 @@ export function UpcomingDeliverables({
                 className="flex items-center justify-between gap-3"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <span className="shrink-0 text-xs font-medium text-copper">
+                  <span className="shrink-0 text-xs font-semibold text-copper">
                     {formatDueDate(deliverable.due_date!)}
                   </span>
                   <span className="truncate text-sm text-foreground">

@@ -76,7 +76,7 @@ export function WizardStepReview({
       <div className="space-y-1">
         <div className="flex items-center gap-2">
           <Sparkles className="h-5 w-5 text-copper" />
-          <h2 className="text-xl font-display font-semibold">Review your brand profile</h2>
+          <h2 className="text-2xl font-display font-semibold">Review your brand profile</h2>
         </div>
         <p className="text-sm text-muted-foreground">
           AI analyzed {postsAnalyzed} posts. Edit any field before creating.

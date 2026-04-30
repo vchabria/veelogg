@@ -53,8 +53,11 @@ export default function BrandHubPage() {
   // ── Profile Select View ──
   if (view.type === "profile-select") {
     return (
-      <div className="space-y-8">
-        <div>
+      <div className="space-y-10">
+        <div className="space-y-3">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-copper/60">
+            YOUR PROFILES
+          </p>
           <h1 className="text-3xl font-display">Brand Hub</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Pick a brand profile to manage deals, calendar, and tools.
@@ -142,7 +145,7 @@ export default function BrandHubPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Back to profiles */}
       <Button variant="ghost" size="sm" onClick={handleBackToSelect}>
         <ArrowLeft className="mr-2 h-4 w-4" />
@@ -199,8 +202,8 @@ function HubOverviewTab({ profileId }: { profileId: string }) {
   }
 
   return (
-    <div className="space-y-8">
-      <div className="grid gap-4 sm:grid-cols-3">
+    <div className="space-y-10">
+      <div className="grid gap-5 sm:grid-cols-3">
         <StatsCard
           icon={<DollarSign className="h-5 w-5 text-copper" />}
           value={formatCurrency(stats?.totalEarnings ?? 0)}
@@ -256,9 +259,9 @@ function HubDealsTab({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-copper/60">
           {deals.length} {deals.length === 1 ? "deal" : "deals"}
         </p>
         {!showForm && (
@@ -283,7 +286,7 @@ function HubDealsTab({
           No deals yet. Create your first deal to get started.
         </p>
       ) : (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           {deals.map((deal) => (
             <BrandDealCard
               key={deal.id}

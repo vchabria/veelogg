@@ -53,7 +53,7 @@ export function BrandProfileList({
   return (
     <div className="space-y-6">
       {/* Grid of profile cards + create card */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {profiles.map((profile) => (
           <BrandProfileCard
             key={profile.id}
@@ -76,12 +76,12 @@ export function BrandProfileList({
               }
             }}
             className={cn(
-              "cursor-pointer border-2 border-dashed border-copper/20",
+              "cursor-pointer border-2 border-dashed border-copper/15",
               "bg-transparent transition-all duration-200",
-              "hover:border-copper/40 hover:bg-copper/5 hover:shadow-warm-lg hover:-translate-y-0.5"
+              "hover:border-copper/30 hover:bg-copper/5 hover:shadow-warm hover:-translate-y-0.5"
             )}
           >
-            <CardContent className="flex h-full min-h-[140px] flex-col items-center justify-center gap-2 p-6">
+            <CardContent className="flex h-full min-h-[140px] flex-col items-center justify-center gap-3 p-7">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-copper/10">
                 <Plus className="h-5 w-5 text-copper" />
               </div>

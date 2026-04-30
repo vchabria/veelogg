@@ -37,11 +37,11 @@ export function BrandDealCard({ deal, onClick }: BrandDealCardProps) {
   return (
     <Card
       className={cn(
-        "cursor-pointer transition-shadow hover:shadow-warm-lg"
+        "cursor-pointer border-0 shadow-warm transition-all duration-200 hover:shadow-warm-lg hover:-translate-y-0.5"
       )}
       onClick={onClick}
     >
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-3 p-7">
         <div className="flex items-start justify-between gap-2">
           <CardTitle className="text-lg">{deal.company_name}</CardTitle>
           {dealValueDisplay && (
@@ -52,7 +52,7 @@ export function BrandDealCard({ deal, onClick }: BrandDealCardProps) {
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-3 px-7 pb-7">
         <div className="flex flex-wrap items-center gap-2">
           <DealStatusBadge status={deal.deal_status} />
           <PaymentStatusBadge status={deal.payment_status} />

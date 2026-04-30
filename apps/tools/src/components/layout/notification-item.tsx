@@ -41,8 +41,8 @@ export function NotificationItem({ notification, onClick }: NotificationItemProp
     <button
       onClick={onClick}
       className={cn(
-        "flex w-full items-start gap-3 rounded-lg px-3 py-2.5 text-left transition-colors hover:bg-accent",
-        !notification.is_read && "bg-copper/5"
+        "flex w-full items-start gap-3 rounded-xl px-3 py-2.5 text-left transition-colors hover:bg-accent",
+        !notification.is_read && "bg-butter/15"
       )}
     >
       <div className="mt-0.5 shrink-0">{getIcon(notification.type)}</div>

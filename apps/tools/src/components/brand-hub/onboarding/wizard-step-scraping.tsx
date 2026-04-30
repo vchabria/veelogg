@@ -27,7 +27,7 @@ export function WizardStepScraping() {
         <div className="h-12 w-12 animate-spin rounded-full border-3 border-copper/20 border-t-copper" />
       </div>
       <div className="space-y-2 text-center">
-        <h2 className="text-lg font-display font-semibold">Analyzing your brand</h2>
+        <h2 className="text-2xl font-display font-semibold">Analyzing your brand</h2>
         <p className="text-sm text-muted-foreground animate-pulse">
           {MESSAGES[messageIndex]}
         </p>
