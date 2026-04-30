@@ -1,0 +1,7 @@
+I'm Varnika, and I run Veelogg — a creative AI engineering studio.
+
+I build AI-powered tools for creators and brands. The first one, Hook Generator, takes your niche and topic and gives you 20 scroll-stopping hooks in 10 seconds using 10 proven copywriting frameworks. It's live at tools.veelogg.com.
+
+I'm shipping 5 tools over 90 days — hooks, scripts, content repurposing, brand pitches, and competitive intelligence — all built on Claude, Next.js, and Supabase. Plus a creator HQ and automated trend pipelines.
+
+The whole thing is built in public. Every tool, every workflow, every decision documented. If you're a creator who wants better tools or a brand that needs creator intelligence, Veelogg is for you.

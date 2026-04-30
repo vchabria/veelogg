@@ -1,0 +1,19 @@
+Varnika Chabria
+AI Engineer & Creator | Founder, Veelogg
+
+I build AI-powered tools for the creator economy.
+
+Veelogg is a creative AI engineering studio — where code meets content. I design and ship production tools (Hook Generator, Script Writer, Brand Pitch Generator, Brand Intelligence Brief) on a public 90-day execution plan.
+
+Tech stack: Next.js, TypeScript, Supabase, Claude, Stripe, n8n, Apify.
+
+Currently building:
+- 5 AI tools for creators and brands (tools.veelogg.com)
+- Veelogg HQ — a Notion-powered creator command center
+- Automated trend pipelines and nurture engines
+
+Previously: automation consulting for 7+ clients across lead gen, email funnels, and CRM workflows.
+
+If you're a brand looking for creator intelligence, a creator who wants better tools, or an engineer who builds in public — let's connect.
+
+veelogg.com

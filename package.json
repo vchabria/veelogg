@@ -1,0 +1,9 @@
+{
+  "name": "veelogg",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter tools dev",
+    "build": "pnpm --filter tools build",
+    "lint": "pnpm --filter tools lint"
+  }
+}

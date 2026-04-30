@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Coastal palette: Old Copper #775537 · Butter Yellow #F8E29D · Nebula #C0DDDA · Seashell #F1F1F1 */
+    --background: 40 20% 98%;
+    --foreground: 28 35% 18%;
+    --card: 0 0% 100%;
+    --card-foreground: 28 35% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 28 35% 18%;
+    --primary: 28 37% 34%;
+    --primary-foreground: 40 20% 97%;
+    --secondary: 45 60% 92%;
+    --secondary-foreground: 28 35% 18%;
+    --muted: 35 15% 93%;
+    --muted-foreground: 28 12% 45%;
+    --accent: 174 25% 90%;
+    --accent-foreground: 174 25% 25%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 35 18% 87%;
+    --input: 35 18% 87%;
+    --ring: 28 37% 34%;
+    --radius: 1.25rem;
+  }
+
+  .dark {
+    --background: 28 25% 8%;
+    --foreground: 35 15% 93%;
+    --card: 28 22% 11%;
+    --card-foreground: 35 15% 93%;
+    --popover: 28 22% 11%;
+    --popover-foreground: 35 15% 93%;
+    --primary: 45 80% 76%;
+    --primary-foreground: 28 35% 12%;
+    --secondary: 28 18% 16%;
+    --secondary-foreground: 35 15% 90%;
+    --muted: 28 15% 15%;
+    --muted-foreground: 28 10% 55%;
+    --accent: 174 18% 18%;
+    --accent-foreground: 174 25% 85%;
+    --destructive: 0 50% 35%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 28 15% 18%;
+    --input: 28 15% 18%;
+    --ring: 45 80% 76%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display), serif;
+  }
+}
+
+@layer utilities {
+  /* Scalloped section divider — place on a full-width element between sections */
+  .scallop-top {
+    --scallop-size: 20px;
+    -webkit-mask-image: radial-gradient(
+      circle at 50% 0%,
+      transparent var(--scallop-size),
+      black calc(var(--scallop-size) + 0.5px)
+    );
+    -webkit-mask-size: calc(var(--scallop-size) * 2.5) 100%;
+    -webkit-mask-position: center top;
+    mask-image: radial-gradient(
+      circle at 50% 0%,
+      transparent var(--scallop-size),
+      black calc(var(--scallop-size) + 0.5px)
+    );
+    mask-size: calc(var(--scallop-size) * 2.5) 100%;
+    mask-position: center top;
+    padding-top: var(--scallop-size);
+  }
+
+  .scallop-bottom {
+    --scallop-size: 20px;
+    -webkit-mask-image: radial-gradient(
+      circle at 50% 100%,
+      transparent var(--scallop-size),
+      black calc(var(--scallop-size) + 0.5px)
+    );
+    -webkit-mask-size: calc(var(--scallop-size) * 2.5) 100%;
+    -webkit-mask-position: center bottom;
+    mask-image: radial-gradient(
+      circle at 50% 100%,
+      transparent var(--scallop-size),
+      black calc(var(--scallop-size) + 0.5px)
+    );
+    mask-size: calc(var(--scallop-size) * 2.5) 100%;
+    mask-position: center bottom;
+    padding-bottom: var(--scallop-size);
+  }
+
+  /* Wavy divider SVG background — use as a decorative hr/separator */
+  .wave-divider {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath d='M0 20 Q 30 0 60 20 Q 90 40 120 20 Q 150 0 180 20 Q 210 40 240 20 Q 270 0 300 20 Q 330 40 360 20 Q 390 0 420 20 Q 450 40 480 20 Q 510 0 540 20 Q 570 40 600 20 Q 630 0 660 20 Q 690 40 720 20 Q 750 0 780 20 Q 810 40 840 20 Q 870 0 900 20 Q 930 40 960 20 Q 990 0 1020 20 Q 1050 40 1080 20 Q 1110 0 1140 20 Q 1170 40 1200 20' fill='none' stroke='%23C0DDDA' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 600px 40px;
+    background-position: center;
+    height: 40px;
+  }
+
+  .wave-divider-copper {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath d='M0 20 Q 30 0 60 20 Q 90 40 120 20 Q 150 0 180 20 Q 210 40 240 20 Q 270 0 300 20 Q 330 40 360 20 Q 390 0 420 20 Q 450 40 480 20 Q 510 0 540 20 Q 570 40 600 20 Q 630 0 660 20 Q 690 40 720 20 Q 750 0 780 20 Q 810 40 840 20 Q 870 0 900 20 Q 930 40 960 20 Q 990 0 1020 20 Q 1050 40 1080 20 Q 1110 0 1140 20 Q 1170 40 1200 20' fill='none' stroke='%23775537' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 600px 40px;
+    background-position: center;
+    height: 40px;
+  }
+}
