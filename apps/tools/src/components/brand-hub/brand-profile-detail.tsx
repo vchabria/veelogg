@@ -158,7 +158,7 @@ export function BrandProfileDetail({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Back button */}
       <Button variant="ghost" size="sm" onClick={onBack}>
         <ArrowLeft className="mr-2 h-4 w-4" />
@@ -166,14 +166,14 @@ export function BrandProfileDetail({
       </Button>
 
       {/* Profile header */}
-      <Card>
-        <CardHeader>
+      <Card className="border-0 shadow-warm">
+        <CardHeader className="p-7">
           <div className="flex items-start justify-between gap-4">
-            <div className="space-y-1">
+            <div className="space-y-2">
               <h1 className="font-display text-3xl font-bold tracking-tight">
                 {profile.name}
               </h1>
-              <p className="text-muted-foreground">{profile.niche}</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-copper/60">{profile.niche}</p>
             </div>
             {!isEditing && (
               <div className="flex items-center gap-2">
@@ -190,12 +190,12 @@ export function BrandProfileDetail({
           </div>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="px-7 pb-7">
           {isEditing ? (
             /* Inline edit form */
             <form onSubmit={handleSaveProfile} className="space-y-4">
               <div className="space-y-2">
-                <label htmlFor="edit_name" className="text-sm font-medium">
+                <label htmlFor="edit_name" className="text-[12px] font-medium text-muted-foreground">
                   Profile Name <span className="text-destructive">*</span>
                 </label>
                 <Input
@@ -207,7 +207,7 @@ export function BrandProfileDetail({
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="edit_niche" className="text-sm font-medium">
+                <label htmlFor="edit_niche" className="text-[12px] font-medium text-muted-foreground">
                   Niche <span className="text-destructive">*</span>
                 </label>
                 <Input
@@ -219,7 +219,7 @@ export function BrandProfileDetail({
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium">
+                <label className="text-[12px] font-medium text-muted-foreground">
                   Platforms <span className="text-destructive">*</span>
                 </label>
                 <div className="flex flex-wrap gap-2">
@@ -242,7 +242,7 @@ export function BrandProfileDetail({
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="edit_voice" className="text-sm font-medium">
+                <label htmlFor="edit_voice" className="text-[12px] font-medium text-muted-foreground">
                   Voice{" "}
                   <span className="text-muted-foreground font-normal">(optional)</span>
                 </label>
@@ -255,7 +255,7 @@ export function BrandProfileDetail({
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="edit_audience" className="text-sm font-medium">
+                <label htmlFor="edit_audience" className="text-[12px] font-medium text-muted-foreground">
                   Audience{" "}
                   <span className="text-muted-foreground font-normal">(optional)</span>
                 </label>
@@ -303,7 +303,7 @@ export function BrandProfileDetail({
               {/* Platform badges */}
               <div className="flex flex-wrap gap-2">
                 {profile.platforms.map((platform) => (
-                  <Badge key={platform} variant="secondary">
+                  <Badge key={platform} variant="secondary" className="text-[11px] px-2.5 py-0.5 bg-copper/5 text-copper/70 border-copper/10">
                     {platformLabels[platform]}
                   </Badge>
                 ))}
@@ -311,15 +311,15 @@ export function BrandProfileDetail({
 
               {profile.voice && (
                 <div>
-                  <span className="text-sm font-medium text-muted-foreground">Voice: </span>
-                  <span className="text-sm">{profile.voice}</span>
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-copper/60">Voice </span>
+                  <p className="text-sm mt-1">{profile.voice}</p>
                 </div>
               )}
 
               {profile.audience && (
                 <div>
-                  <span className="text-sm font-medium text-muted-foreground">Audience: </span>
-                  <span className="text-sm">{profile.audience}</span>
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-copper/60">Audience </span>
+                  <p className="text-sm mt-1">{profile.audience}</p>
                 </div>
               )}
             </div>
@@ -328,9 +328,9 @@ export function BrandProfileDetail({
       </Card>
 
       {/* Deals section */}
-      <div className="space-y-4">
+      <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="font-display text-xl font-semibold">Deals</h2>
+          <h2 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-copper/60">Deals</h2>
           {!showNewDealForm && (
             <Button size="sm" onClick={() => setShowNewDealForm(true)}>
               <Plus className="mr-2 h-4 w-4" />
@@ -341,11 +341,11 @@ export function BrandProfileDetail({
 
         {/* Inline new deal form */}
         {showNewDealForm && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">New Deal</CardTitle>
+          <Card className="border-0 shadow-warm">
+            <CardHeader className="p-7 pb-4">
+              <CardTitle className="text-base">New Deal</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="px-7 pb-7">
               <BrandDealForm
                 profileId={profileId}
                 onSubmit={handleCreateDeal}
@@ -366,7 +366,7 @@ export function BrandProfileDetail({
             No deals yet. Create your first deal to get started.
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {deals.map((deal) => (
               <BrandDealCard
                 key={deal.id}

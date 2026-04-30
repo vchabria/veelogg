@@ -78,18 +78,18 @@ export function DeliverableForm({
     "flex h-10 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
 
   return (
-    <Card className="border-copper/15">
-      <CardHeader>
-        <CardTitle className="text-lg">
+    <Card className="border-0 shadow-warm">
+      <CardHeader className="p-7 pb-4">
+        <CardTitle className="text-base">
           {isEdit ? "Edit Deliverable" : "New Deliverable"}
         </CardTitle>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="px-7 pb-7">
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Title */}
           <div className="space-y-2">
-            <label className="text-[13px] font-medium text-foreground">
+            <label className="text-[12px] font-medium text-muted-foreground">
               Title <span className="text-destructive">*</span>
             </label>
             <Input
@@ -103,7 +103,7 @@ export function DeliverableForm({
 
           {/* Description */}
           <div className="space-y-2">
-            <label className="text-[13px] font-medium text-foreground">
+            <label className="text-[12px] font-medium text-muted-foreground">
               Description
             </label>
             <Textarea
@@ -117,7 +117,7 @@ export function DeliverableForm({
 
           {/* Platform */}
           <div className="space-y-2">
-            <label className="text-[13px] font-medium text-foreground">
+            <label className="text-[12px] font-medium text-muted-foreground">
               Platform
             </label>
             <select
@@ -139,7 +139,7 @@ export function DeliverableForm({
 
           {/* Due date */}
           <div className="space-y-2">
-            <label className="text-[13px] font-medium text-foreground">
+            <label className="text-[12px] font-medium text-muted-foreground">
               Due date
             </label>
             <Input
@@ -153,7 +153,7 @@ export function DeliverableForm({
           {/* Status (edit mode only) */}
           {isEdit && (
             <div className="space-y-2">
-              <label className="text-[13px] font-medium text-foreground">
+              <label className="text-[12px] font-medium text-muted-foreground">
                 Status
               </label>
               <select
@@ -178,7 +178,7 @@ export function DeliverableForm({
           {/* Posted URL (only when status is posted or paid) */}
           {showPostedUrl && (
             <div className="space-y-2">
-              <label className="text-[13px] font-medium text-foreground">
+              <label className="text-[12px] font-medium text-muted-foreground">
                 Posted URL
               </label>
               <Input
@@ -193,7 +193,7 @@ export function DeliverableForm({
 
           {/* Notes */}
           <div className="space-y-2">
-            <label className="text-[13px] font-medium text-foreground">
+            <label className="text-[12px] font-medium text-muted-foreground">
               Notes
             </label>
             <Textarea

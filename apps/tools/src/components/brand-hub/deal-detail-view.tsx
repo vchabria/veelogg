@@ -110,7 +110,7 @@ export function DealDetailView({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Back button */}
       <Button variant="ghost" size="sm" onClick={onBack}>
         <ArrowLeft className="mr-2 h-4 w-4" />
@@ -127,11 +127,11 @@ export function DealDetailView({
           loading={editingSaving}
         />
       ) : (
-        <Card className="border-copper/10">
-          <CardHeader>
+        <Card className="border-0 shadow-warm">
+          <CardHeader className="p-7">
             <div className="flex items-start justify-between gap-4">
-              <div className="space-y-1">
-                <h1 className="text-2xl font-display">{deal.company_name}</h1>
+              <div className="space-y-2">
+                <h1 className="text-3xl font-display">{deal.company_name}</h1>
                 {deal.deal_value !== null && (
                   <p className="text-lg font-semibold text-copper">
                     {formatCurrency(deal.deal_value)}
@@ -156,7 +156,7 @@ export function DealDetailView({
               </div>
             </div>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 px-7 pb-7">
             {/* Status badges */}
             <div className="flex flex-wrap items-center gap-2">
               <DealStatusBadge status={deal.deal_status} />
@@ -200,9 +200,9 @@ export function DealDetailView({
       )}
 
       {/* Deliverables section */}
-      <div className="space-y-4">
+      <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold">Deliverables</h2>
+          <h2 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-copper/60">Deliverables</h2>
           {!showDeliverableForm && !editingDeliverable && (
             <Button
               size="sm"

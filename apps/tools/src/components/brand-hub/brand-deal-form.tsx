@@ -84,7 +84,7 @@ export function BrandDealForm({
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Company Name */}
       <div className="space-y-2">
-        <label htmlFor="company_name" className="text-sm font-medium">
+        <label htmlFor="company_name" className="text-[12px] font-medium text-muted-foreground">
           Company Name <span className="text-destructive">*</span>
         </label>
         <Input
@@ -98,7 +98,7 @@ export function BrandDealForm({
 
       {/* Deal Value */}
       <div className="space-y-2">
-        <label htmlFor="deal_value" className="text-sm font-medium">
+        <label htmlFor="deal_value" className="text-[12px] font-medium text-muted-foreground">
           Deal Value (USD){" "}
           <span className="text-muted-foreground font-normal">(optional)</span>
         </label>
@@ -116,7 +116,7 @@ export function BrandDealForm({
       {/* Status selects - side by side */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <label htmlFor="deal_status" className="text-sm font-medium">
+          <label htmlFor="deal_status" className="text-[12px] font-medium text-muted-foreground">
             Deal Status
           </label>
           <select
@@ -134,7 +134,7 @@ export function BrandDealForm({
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="payment_status" className="text-sm font-medium">
+          <label htmlFor="payment_status" className="text-[12px] font-medium text-muted-foreground">
             Payment Status
           </label>
           <select
@@ -155,7 +155,7 @@ export function BrandDealForm({
       {/* Contact Info */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <label htmlFor="contact_name" className="text-sm font-medium">
+          <label htmlFor="contact_name" className="text-[12px] font-medium text-muted-foreground">
             Contact Name{" "}
             <span className="text-muted-foreground font-normal">(optional)</span>
           </label>
@@ -168,7 +168,7 @@ export function BrandDealForm({
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="contact_email" className="text-sm font-medium">
+          <label htmlFor="contact_email" className="text-[12px] font-medium text-muted-foreground">
             Contact Email{" "}
             <span className="text-muted-foreground font-normal">(optional)</span>
           </label>
@@ -185,7 +185,7 @@ export function BrandDealForm({
       {/* Dates */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <label htmlFor="start_date" className="text-sm font-medium">
+          <label htmlFor="start_date" className="text-[12px] font-medium text-muted-foreground">
             Start Date{" "}
             <span className="text-muted-foreground font-normal">(optional)</span>
           </label>
@@ -198,7 +198,7 @@ export function BrandDealForm({
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="end_date" className="text-sm font-medium">
+          <label htmlFor="end_date" className="text-[12px] font-medium text-muted-foreground">
             End Date{" "}
             <span className="text-muted-foreground font-normal">(optional)</span>
           </label>
@@ -213,7 +213,7 @@ export function BrandDealForm({
 
       {/* Notes */}
       <div className="space-y-2">
-        <label htmlFor="notes" className="text-sm font-medium">
+        <label htmlFor="notes" className="text-[12px] font-medium text-muted-foreground">
           Notes{" "}
           <span className="text-muted-foreground font-normal">(optional)</span>
         </label>

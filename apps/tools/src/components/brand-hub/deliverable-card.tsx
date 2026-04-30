@@ -50,8 +50,8 @@ export function DeliverableCard({
     isOverdue(deliverable.due_date, deliverable.status);
 
   return (
-    <Card className="border-copper/10 hover:shadow-warm transition-shadow">
-      <CardContent className="p-4 space-y-3">
+    <Card className="border-0 shadow-warm hover:shadow-warm-lg transition-all duration-200">
+      <CardContent className="p-5 space-y-3">
         {/* Title */}
         <p className="text-sm font-semibold text-foreground leading-snug line-clamp-2">
           {deliverable.title}

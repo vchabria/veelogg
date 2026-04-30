@@ -98,17 +98,17 @@ export function DeliverablePipeline({
         return (
           <div
             key={col.status}
-            className="flex flex-col rounded-2xl border border-border/60 bg-card overflow-hidden"
+            className="flex flex-col rounded-2xl border-0 shadow-warm bg-card overflow-hidden"
           >
             {/* Column header */}
             <div
               className={cn(
-                "px-4 py-3 flex items-center justify-between rounded-t-2xl",
+                "px-4 py-3 flex items-center justify-between",
                 col.headerBg
               )}
             >
               <span
-                className={cn("text-sm font-semibold", col.headerText)}
+                className={cn("text-[11px] font-semibold uppercase tracking-[0.15em]", col.headerText)}
               >
                 {col.label}
               </span>

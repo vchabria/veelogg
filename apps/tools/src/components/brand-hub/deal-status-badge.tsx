@@ -33,7 +33,7 @@ export function DealStatusBadge({ status }: DealStatusBadgeProps) {
   return (
     <Badge
       variant="outline"
-      className={cn("font-medium", config.className)}
+      className={cn("font-medium text-[11px] rounded-full px-2.5", config.className)}
     >
       {config.label}
     </Badge>

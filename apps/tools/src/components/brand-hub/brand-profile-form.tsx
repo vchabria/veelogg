@@ -58,18 +58,18 @@ export function BrandProfileForm({
   const canSubmit = name.trim().length > 0 && niche.trim().length > 0;
 
   return (
-    <Card className="border-copper/15">
-      <CardHeader>
-        <CardTitle className="text-lg">
+    <Card className="border-0 shadow-warm">
+      <CardHeader className="p-7 pb-4">
+        <CardTitle className="text-base">
           {isEdit ? "Edit Profile" : "New Brand Profile"}
         </CardTitle>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="px-7 pb-7">
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Name */}
           <div className="space-y-2">
-            <label className="text-[13px] font-medium text-foreground">
+            <label className="text-[12px] font-medium text-muted-foreground">
               Brand / channel name <span className="text-destructive">*</span>
             </label>
             <Input
@@ -83,7 +83,7 @@ export function BrandProfileForm({
 
           {/* Niche */}
           <div className="space-y-2">
-            <label className="text-[13px] font-medium text-foreground">
+            <label className="text-[12px] font-medium text-muted-foreground">
               Niche <span className="text-destructive">*</span>
             </label>
             <Input
@@ -97,7 +97,7 @@ export function BrandProfileForm({
 
           {/* Platforms */}
           <div className="space-y-2">
-            <label className="text-[13px] font-medium text-foreground">
+            <label className="text-[12px] font-medium text-muted-foreground">
               Platforms
             </label>
             <PlatformPicker selected={platforms} onChange={setPlatforms} />
@@ -105,7 +105,7 @@ export function BrandProfileForm({
 
           {/* Voice */}
           <div className="space-y-2">
-            <label className="text-[13px] font-medium text-foreground">
+            <label className="text-[12px] font-medium text-muted-foreground">
               Brand voice
             </label>
             <Textarea
@@ -119,7 +119,7 @@ export function BrandProfileForm({
 
           {/* Audience */}
           <div className="space-y-2">
-            <label className="text-[13px] font-medium text-foreground">
+            <label className="text-[12px] font-medium text-muted-foreground">
               Target audience
             </label>
             <Textarea

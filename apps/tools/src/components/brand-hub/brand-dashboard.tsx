@@ -48,7 +48,7 @@ export function BrandDashboard({ onSelectProfile }: BrandDashboardProps) {
       </div>
 
       {/* Stats row */}
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-3">
         <StatsCard
           icon={<DollarSign className="h-5 w-5 text-copper" />}
           value={formatCurrency(stats?.totalEarnings ?? 0)}
@@ -67,8 +67,8 @@ export function BrandDashboard({ onSelectProfile }: BrandDashboardProps) {
       </div>
 
       {/* Brand profiles */}
-      <div className="space-y-4">
-        <h2 className="text-lg font-semibold">Your Profiles</h2>
+      <div className="space-y-6">
+        <h2 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-copper/60">Your Profiles</h2>
         <BrandProfileList
           profiles={profiles}
           deals={deals}
