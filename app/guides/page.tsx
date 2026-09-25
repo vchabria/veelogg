@@ -1,0 +1,10 @@
+import type { Metadata } from "next";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { SiteHeader, SiteFooter } from "@/components/site-shell";
+import { GuideLibrary } from "@/components/guide-library";
+import { guides,guideUrl } from "@/lib/guides";
+export const metadata:Metadata={title:"Free AI, Content & Automation Guides | Veelogg",description:"Explore Varnika’s free guides for brand voice, AI content, automation and better websites. Practical prompts, checklists and workflows to use in your business.",alternates:{canonical:"https://www.veelogg.com/guides"},openGraph:{title:"Free AI & Content Guides | Veelogg",description:"Prompts, checklists and workflows, from my desk to yours.",url:"https://www.veelogg.com/guides",type:"website"}};
+export default function GuidesPage(){
+ const schema={"@context":"https://schema.org","@type":"CollectionPage",name:"Veelogg free guides",url:"https://www.veelogg.com/guides",about:["AI content","Brand voice","Business automation","Websites"],mainEntity:{"@type":"ItemList",itemListElement:guides.map((g,i)=>({"@type":"ListItem",position:i+1,name:g.fullTitle,url:guideUrl(g.slug)}))}};
+ return <><SiteHeader/><main id="main"><section className="library-hero wrap"><div className="library-heading"><h1>good stuff.<br/><span>zero gatekeeping.</span></h1><p>Free AI guides, prompts and workflows.<br/>From my desk to yours. Pick what you need and make it your own.</p><a href="#guide-library" className="text-link">open the collection <ArrowDown size={18}/></a></div><div className="library-stamp"><span>take one.<br/>take eight.</span><strong>FREE</strong></div></section><section id="guide-library" className="library-section wrap" aria-label="All free guides"><GuideLibrary/></section><section className="guide-help wrap"><h2>want me to build<br/>the whole thing?</h2><a href="/#work-with-me" className="button button-brown">work with me <ArrowUpRight size={20}/></a></section><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g,"\\u003c")}}/></main><SiteFooter/></>;
+}
