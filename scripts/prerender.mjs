@@ -31,6 +31,7 @@ const GUIDE_SLUGS = [
 const HTML_ROUTES = [
   "/", "/work-with-me", "/ai-systems", "/content-done", "/builds",
   "/mentorship", "/about", "/contact", "/partnerships",
+  "/edit-skill",
   "/guides",
   ...GUIDE_SLUGS.map((slug) => "/guides/" + slug),
 ];

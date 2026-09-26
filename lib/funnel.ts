@@ -8,7 +8,7 @@
 export const CALENDLY_URL = "https://calendly.com/itismevarnica/jvs-cte";
 // Booking CTAs point at the on-site embedded calendar, not off to calendly.com.
 export const BOOKING_URL = "/contact#book";
-export const MAGNET_URL = "/guides";   // TODO: replace with Kit edit-skill landing page
+export const MAGNET_URL = "/edit-skill"; // on-site opt-in page for the free edit skill
 
 /* an off-site URL should open in the same tab for booking, but we mark
    external so links get rel/target handling where it matters */
