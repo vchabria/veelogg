@@ -319,3 +319,5 @@
  .home-guide-ctas{width:100%}
  .home-guide-ctas .button{width:100%;justify-content:space-between}
 }
+.calendly-embed{margin-top:22px;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#fffdf8;min-height:700px}
+.calendly-inline-widget{width:100%}

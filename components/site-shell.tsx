@@ -18,7 +18,7 @@ export function SiteHeader() {
     <div className="nav-wrap">
       <a className="brand" href="/" aria-label="Veelogg home"><img src="/assets/veelogg-logo.svg" alt="Veelogg" width="347" height="68" /></a>
       <nav className="desktop-nav" aria-label="Main navigation">{NAV.map(([href, label]) => <a key={href} href={href}>{label}</a>)}</nav>
-      <a className="button button-small button-brown plausible-event-name=book_click" href={BOOKING_URL} target="_blank" rel="noopener">book a call <ArrowUpRight size={18} /></a>
+      <a className="button button-small button-brown plausible-event-name=book_click" href={BOOKING_URL}>book a call <ArrowUpRight size={18} /></a>
       <button className="menu-button" onClick={() => setOpen(!open)} aria-label={open ? "Close navigation" : "Open navigation"} aria-expanded={open} aria-controls="mobile-nav">{open ? <X /> : <Menu />}</button>
     </div>
     {open && <nav id="mobile-nav" className="mobile-nav" aria-label="Mobile navigation">{[...NAV, [SUBSTACK_URL, "writing"], ["/partnerships", "brand collaborations"], [BOOKING_URL, "book a call"]].map(([href, label]) => <a key={href} href={href} onClick={() => setOpen(false)} {...(href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}>{label}<ArrowUpRight size={20} /></a>)}</nav>}
