@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { SiteHeader, SiteFooter } from "@/components/site-shell";
 import { InquiryForm } from "@/components/inquiry-form";
+import { ArrowUpRight } from "lucide-react";
 import { JsonLd, breadcrumb } from "@/components/seo";
 import { CONTACT_EMAIL } from "@/lib/content";
+import { BOOKING_URL } from "@/lib/funnel";
 
 export const metadata: Metadata = {
   title: "Start a Project | Veelogg",
@@ -21,6 +23,13 @@ export default function ContactPage() {
     </section>
     <section className="page-section wrap" id="form">
       <div className="narrow">
+        <div className="book-callout">
+          <div>
+            <h2>prefer to talk? book 25 minutes.</h2>
+            <p>The fastest way to see if this fits: a short call, no deck. Or write to me below.</p>
+          </div>
+          <a className="button button-brown plausible-event-name=book_click" href={BOOKING_URL}>book a call <ArrowUpRight size={19} /></a>
+        </div>
         <InquiryForm />
         <p className="cs-note">Prefer email? Reach me at <a className="inline-link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
       </div>

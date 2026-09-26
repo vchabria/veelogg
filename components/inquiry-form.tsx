@@ -50,7 +50,7 @@ export function InquiryForm() {
   const campaign = useRef<Record<string, string>>({});
   const [form, setForm] = useState({
     name: "", email: "", link: "", company: "", help: "ai-systems",
-    about: "", timing: "soon", budget: "", owner: "", agencyScope: "",
+    about: "", timing: "soon", owner: "", agencyScope: "",
   });
 
   useEffect(() => {
@@ -81,7 +81,12 @@ export function InquiryForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ formType: "inquiry", ...form, campaign: campaign.current }),
       });
-      setStatus(res.ok ? "success" : "error");
+      if (res.ok) {
+        setStatus("success");
+        try { (window as unknown as { plausible?: (e: string) => void }).plausible?.("form_submit"); } catch { /* ignore */ }
+      } else {
+        setStatus("error");
+      }
     } catch { setStatus("error"); }
   }
 
@@ -124,11 +129,8 @@ export function InquiryForm() {
 
       <div className="inquiry-field"><label htmlFor="iq-about">what does your company do, and which work still needs too much of the founder?</label><textarea id="iq-about" name="about" rows={4} required placeholder="a few lines is plenty" value={form.about} onChange={set} /></div>
 
-      <div className="inquiry-row">
-        <div className="inquiry-field"><label htmlFor="iq-timing">when would you like to start?</label>
-          <select id="iq-timing" name="timing" value={form.timing} onChange={set}>{TIMING.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}</select>
-        </div>
-        <div className="inquiry-field"><label htmlFor="iq-budget">what budget have you set aside?</label><input id="iq-budget" name="budget" placeholder="a rough range is useful. ‘not sure yet’ is fine." value={form.budget} onChange={set} /></div>
+      <div className="inquiry-field"><label htmlFor="iq-timing">when would you like to start?</label>
+        <select id="iq-timing" name="timing" value={form.timing} onChange={set}>{TIMING.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}</select>
       </div>
 
       {status === "error" && (

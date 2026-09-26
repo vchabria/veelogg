@@ -299,3 +299,23 @@
  .guide-step-num{width:38px;height:38px;font-size:16px}
  .guide-cta{padding:26px 24px}
 }
+
+/* funnel: booking + lead magnet UI */
+.footer-join{font-size:14px;line-height:1.6;color:var(--ink-muted);max-width:520px;margin-top:4px}
+.footer-join a{color:var(--brown);font-weight:500;text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.home-guide-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.book-callout{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:var(--pink);border-radius:16px;padding:24px 28px;margin-bottom:32px}
+.book-callout h2{font-size:24px;font-weight:600;letter-spacing:-.02em}
+.book-callout p{font-size:15px;line-height:1.6;margin-top:6px;max-width:52ch}
+.book-callout .button{flex-shrink:0}
+.magnet-card{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;background:var(--yellow);color:var(--brown);border-radius:20px;padding:32px 34px;transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.magnet-card:hover{transform:translateY(-3px)}
+.magnet-tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.02em;background:#fff;border-radius:20px;padding:4px 12px;margin-bottom:12px}
+.magnet-card h2{font-size:clamp(24px,3vw,32px);font-weight:600;letter-spacing:-.02em}
+.magnet-card p{font-size:15px;line-height:1.6;margin-top:10px;max-width:60ch}
+.magnet-card .button{flex-shrink:0;pointer-events:none}
+@media(max-width:640px){
+ .book-callout,.magnet-card{flex-direction:column;align-items:flex-start}
+ .home-guide-ctas{width:100%}
+ .home-guide-ctas .button{width:100%;justify-content:space-between}
+}

@@ -5,6 +5,7 @@ import {
   PROCESS, FOUNDER, WRITING, FINAL, SERVICES, SUBSTACK_URL,
 } from "@/lib/content";
 import { MethodFlow, AudienceSplit } from "@/components/diagrams";
+import { BOOKING_URL, MAGNET_URL } from "@/lib/funnel";
 
 export default function Home() {
   const schema = {
@@ -23,7 +24,7 @@ export default function Home() {
         <h1>{HERO.headline}</h1>
         <p className="home-lede">{HERO.body}</p>
         <div className="home-hero-actions">
-          <a className="button button-brown" href={FINAL.href}>start a project <ArrowUpRight size={20} /></a>
+          <a className="button button-brown plausible-event-name=book_click" href={BOOKING_URL}>book a call <ArrowUpRight size={20} /></a>
           <a className="button button-outline" href="/work-with-me">ways to work together <ArrowRight size={18} /></a>
         </div>
         <p className="home-capability">{HERO.capability}</p>
@@ -118,9 +119,12 @@ export default function Home() {
       <div className="section-heading">
         <div>
           <h2 className="section-title">start with the context.</h2>
-          <p>Before you ask AI to sound like your business, give it something useful to work with. Free guides, no email required.</p>
+          <p>Before you ask AI to sound like your business, give it something useful to work with. Grab the edit skill I use on client work, plus free guides, no email required for the guides.</p>
         </div>
-        <a className="button button-outline" href="/guides">all free guides <ArrowUpRight size={19} /></a>
+        <div className="home-guide-ctas">
+          <a className="button button-brown plausible-event-name=guide_click" href={MAGNET_URL}>get the edit skill, free <ArrowUpRight size={19} /></a>
+          <a className="button button-outline" href="/guides">all free guides <ArrowRight size={18} /></a>
+        </div>
       </div>
     </section>
 
@@ -138,7 +142,7 @@ export default function Home() {
       <div className="narrow">
         <h2 className="final-title">{FINAL.title}</h2>
         <p className="lede-body">{FINAL.body}</p>
-        <a className="button button-brown" href={FINAL.href}>{FINAL.button} <ArrowUpRight size={21} /></a>
+        <a className="button button-brown plausible-event-name=book_click" href={BOOKING_URL}>book a 25-min call <ArrowUpRight size={21} /></a>
       </div>
     </section>
 

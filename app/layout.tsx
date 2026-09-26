@@ -28,6 +28,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Plausible analytics (privacy-friendly, no cookie banner). Tagged-events
+            build supports goal events via classNames + window.plausible(). */}
+        <script defer data-domain="veelogg.com" src="https://plausible.io/js/script.tagged-events.js"></script>
+        <script dangerouslySetInnerHTML={{ __html: "window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}" }} />
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   );
