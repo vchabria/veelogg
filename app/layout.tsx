@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   publisher: "Veelogg",
   applicationName: "Veelogg",
   alternates: { canonical: "https://www.veelogg.com" },
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
   openGraph: { title: "Brand Strategy & AI Marketing Systems | Veelogg", description: "Brand and marketing strategy, creative direction and AI systems for founder-led SaaS, product companies and agencies.", url: "https://www.veelogg.com", siteName: "Veelogg", type: "website", locale: "en_US", images: [{ url: "/assets/og.png", width: 1200, height: 630, alt: "Veelogg, brand & marketing strategy built into AI" }] },
   twitter: { card: "summary_large_image", title: "Brand Strategy & AI Marketing Systems | Veelogg", description: "Strategy, creative direction and AI systems for SaaS, product companies and agencies.", images: ["/assets/og.png"] },
   icons: {
