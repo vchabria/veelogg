@@ -11,15 +11,6 @@ export const metadata: Metadata = {
   openGraph: { title: "Brand Collaborations | Veelogg", description: "Paid product demonstrations, creative campaigns and brand partnerships.", url: "https://www.veelogg.com/partnerships", type: "website" },
 };
 
-/* Samples are labelled placeholders. Replace with real, accurately-labelled
-   samples and current dated audience metrics before launch. A sample is not
-   proof of a paid partnership. */
-const SAMPLES = [
-  "[ placeholder, product demo sample, add your role + dated metrics ]",
-  "[ placeholder, creative campaign sample, add your role + dated metrics ]",
-  "[ placeholder, tutorial or partnership sample, add your role + dated metrics ]",
-];
-
 export default function PartnershipsPage() {
   return <><SiteHeader /><main id="main">
     <section className="page-hero wrap"><div className="narrow">
@@ -30,12 +21,6 @@ export default function PartnershipsPage() {
     </div></section>
 
     <section className="page-section band wrap"><div className="narrow">
-      <h2 className="section-title">a few samples</h2>
-      <p className="cs-note">Accurately-labelled samples, not claims of a paid partnership. Scope, usage and exclusivity are agreed separately.</p>
-      <ul className="def-list">{SAMPLES.map((s, i) => <li key={i}>{s}</li>)}</ul>
-    </div></section>
-
-    <section className="page-section wrap"><div className="narrow">
       <h2 className="section-title">what we agree separately</h2>
       <p className="cs-body">Production, publication to my audience, paid-ad usage, duration, exclusivity and additional versions.</p>
     </div></section>

@@ -44,7 +44,7 @@ export default function AboutPage() {
       <h2 className="section-title">here’s how i see it</h2>
       <p className="cs-body">I share the decisions behind the work: the reference, the correction, the tool choice, the part that needed another look.</p>
       <div className="link-row">
-        <a className="text-link" href="/work">see the work <ArrowRight size={17} /></a>
+        <a className="text-link" href="/work-with-me">see how i work <ArrowRight size={17} /></a>
         <a className="text-link" href="https://instagram.com/veelogg_" target="_blank" rel="noreferrer">find me on Instagram <ArrowUpRight size={16} /></a>
       </div>
     </div></section>

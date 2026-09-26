@@ -1,10 +1,9 @@
-import { ArrowUpRight, ArrowRight, Check } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { SiteHeader, SiteFooter } from "@/components/site-shell";
 import {
-  HERO, AUDIENCES, SELECTED_WORK, BUSINESS_UNDERSTANDING, RANGE, WAYS,
-  PROCESS, FOUNDER, GUIDES_TEASER, WRITING, FINAL, SERVICES, SUBSTACK_URL,
+  HERO, AUDIENCES, BUSINESS_UNDERSTANDING, RANGE, WAYS,
+  PROCESS, FOUNDER, WRITING, FINAL, SERVICES, SUBSTACK_URL,
 } from "@/lib/content";
-import { WORK_CASES } from "@/lib/work";
 import { MethodFlow, AudienceSplit } from "@/components/diagrams";
 
 export default function Home() {
@@ -25,7 +24,7 @@ export default function Home() {
         <p className="home-lede">{HERO.body}</p>
         <div className="home-hero-actions">
           <a className="button button-brown" href={FINAL.href}>start a project <ArrowUpRight size={20} /></a>
-          <a className="button button-outline" href="/work">see the work <ArrowRight size={18} /></a>
+          <a className="button button-outline" href="/work-with-me">ways to work together <ArrowRight size={18} /></a>
         </div>
         <p className="home-capability">{HERO.capability}</p>
       </div>
@@ -48,21 +47,6 @@ export default function Home() {
         ))}
       </div>
       <AudienceSplit />
-    </section>
-
-    {/* ── SELECTED WORK ── */}
-    <section className="page-section wrap" id="selected-work">
-      <div className="section-heading"><h2>{SELECTED_WORK.title}</h2><div><p>{SELECTED_WORK.body}</p><a className="button button-outline" href={SELECTED_WORK.href}>{SELECTED_WORK.button} <ArrowUpRight size={19} /></a></div></div>
-      <div className="work-grid">
-        {WORK_CASES.map((c) => (
-          <a className="work-teaser" href={`/work#${c.slug}`} key={c.slug}>
-            <span className="work-label">{c.label}</span>
-            <h3>{c.title}</h3>
-            <p>{c.summary}</p>
-            <span className="text-link">see the case <ArrowRight size={16} /></span>
-          </a>
-        ))}
-      </div>
     </section>
 
     {/* ── BUSINESS UNDERSTANDING ── */}
@@ -127,16 +111,6 @@ export default function Home() {
         {FOUNDER.paras.map((p, i) => <p key={i} className="lede-body">{p}</p>)}
         <a className="text-link" href={FOUNDER.linkHref}>{FOUNDER.linkText} <ArrowRight size={17} /></a>
       </div>
-    </section>
-
-    {/* ── FREE GUIDES ── */}
-    <section className="page-section wrap" id="guides-teaser">
-      <div className="section-heading"><h2>{GUIDES_TEASER.title}</h2><div><p>{GUIDES_TEASER.body}</p><a className="button button-outline" href="/guides">all free guides <ArrowUpRight size={19} /></a></div></div>
-      <a className="guide-feature" href="/guides">
-        <Check size={20} />
-        <div><h3>{GUIDES_TEASER.guideTitle}</h3><p>{GUIDES_TEASER.guideBody}</p></div>
-        <span className="text-link">open the guide <ArrowRight size={16} /></span>
-      </a>
     </section>
 
     {/* ── WRITING ── */}
