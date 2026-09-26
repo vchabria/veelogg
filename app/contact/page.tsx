@@ -28,7 +28,7 @@ export default function ContactPage() {
             <h2>prefer to talk? book 25 minutes.</h2>
             <p>The fastest way to see if this fits: a short call, no deck. Or write to me below.</p>
           </div>
-          <a className="button button-brown plausible-event-name=book_click" href={BOOKING_URL}>book a call <ArrowUpRight size={19} /></a>
+          <a className="button button-brown plausible-event-name=book_click" href={BOOKING_URL} target="_blank" rel="noopener">book a call <ArrowUpRight size={19} /></a>
         </div>
         <InquiryForm />
         <p className="cs-note">Prefer email? Reach me at <a className="inline-link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>

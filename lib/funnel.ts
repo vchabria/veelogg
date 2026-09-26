@@ -4,7 +4,7 @@
    - MAGNET_URL  -> Kit landing page for the gated edit skill + walkthrough
    Until then they fall back to safe on-site pages so no CTA can break. */
 
-export const BOOKING_URL = "/contact"; // TODO: replace with Cal.com booking link
+export const BOOKING_URL = "https://calendly.com/itismevarnica/jvs-cte"; // Calendly "25 min" booking
 export const MAGNET_URL = "/guides";   // TODO: replace with Kit edit-skill landing page
 
 /* an off-site URL should open in the same tab for booking, but we mark

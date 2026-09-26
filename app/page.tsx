@@ -24,7 +24,7 @@ export default function Home() {
         <h1>{HERO.headline}</h1>
         <p className="home-lede">{HERO.body}</p>
         <div className="home-hero-actions">
-          <a className="button button-brown plausible-event-name=book_click" href={BOOKING_URL}>book a call <ArrowUpRight size={20} /></a>
+          <a className="button button-brown plausible-event-name=book_click" href={BOOKING_URL} target="_blank" rel="noopener">book a call <ArrowUpRight size={20} /></a>
           <a className="button button-outline" href="/work-with-me">ways to work together <ArrowRight size={18} /></a>
         </div>
         <p className="home-capability">{HERO.capability}</p>
@@ -142,7 +142,7 @@ export default function Home() {
       <div className="narrow">
         <h2 className="final-title">{FINAL.title}</h2>
         <p className="lede-body">{FINAL.body}</p>
-        <a className="button button-brown plausible-event-name=book_click" href={BOOKING_URL}>book a 25-min call <ArrowUpRight size={21} /></a>
+        <a className="button button-brown plausible-event-name=book_click" href={BOOKING_URL} target="_blank" rel="noopener">book a 25-min call <ArrowUpRight size={21} /></a>
       </div>
     </section>
 
