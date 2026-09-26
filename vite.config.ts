@@ -1,13 +1,25 @@
+import { readFileSync } from "node:fs";
 import vinext from "vinext";
 import { defineConfig } from "vite";
-import hostingConfig from "./.openai/hosting.json";
 import { readExecutionProfile } from "./scripts/execution-profile.mjs";
 import { sites } from "./build/sites-vite-plugin";
 
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
   "00000000-0000-4000-8000-000000000000";
 
-const { d1, r2 } = hostingConfig;
+// hosting.json is local-only tool state (git-ignored). Read it if present,
+// otherwise default to no D1/R2 bindings so the build works anywhere (Vercel, CI).
+let d1: string | null = null;
+let r2: string | null = null;
+try {
+  const hostingConfig = JSON.parse(
+    readFileSync(new URL("./.openai/hosting.json", import.meta.url), "utf8"),
+  ) as { d1: string | null; r2: string | null };
+  d1 = hostingConfig.d1 ?? null;
+  r2 = hostingConfig.r2 ?? null;
+} catch {
+  /* no hosting.json in this environment */
+}
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
