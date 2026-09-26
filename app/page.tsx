@@ -113,6 +113,17 @@ export default function Home() {
       </div>
     </section>
 
+    {/* ── FREE GUIDES ── */}
+    <section className="page-section wrap" id="guides">
+      <div className="section-heading">
+        <div>
+          <h2 className="section-title">start with the context.</h2>
+          <p>Before you ask AI to sound like your business, give it something useful to work with. Free guides, no email required.</p>
+        </div>
+        <a className="button button-outline" href="/guides">all free guides <ArrowUpRight size={19} /></a>
+      </div>
+    </section>
+
     {/* ── WRITING ── */}
     <section className="page-section band wrap" id="writing">
       <div className="narrow">

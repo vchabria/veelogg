@@ -6,6 +6,7 @@ import { SUBSTACK_URL, STUDIO_DESCRIPTOR } from "@/lib/content";
 const NAV = [
   ["/work-with-me", "work with me"],
   ["/ai-systems", "ai systems"],
+  ["/guides", "free guides"],
   ["/about", "about"],
 ];
 
@@ -27,7 +28,7 @@ export function SiteFooter() {
   return <footer className="site-footer wrap">
     <a className="footer-logo" href="/" aria-label="Veelogg home"><img src="/assets/veelogg-logo.svg" alt="Veelogg" width="347" height="68" /></a>
     <p className="footer-descriptor">{STUDIO_DESCRIPTOR}</p>
-    <div className="footer-links"><a href="/work-with-me">work with me</a><a href="/ai-systems">ai systems</a><a href="/about">about</a><a href={SUBSTACK_URL} target="_blank" rel="noreferrer">writing <ArrowUpRight size={15} /></a><a href="/partnerships">brand collaborations</a><a href="https://instagram.com/veelogg_" target="_blank" rel="noreferrer">instagram <ArrowUpRight size={15} /></a><a href="/contact">contact</a></div>
+    <div className="footer-links"><a href="/work-with-me">work with me</a><a href="/ai-systems">ai systems</a><a href="/guides">free guides</a><a href="/about">about</a><a href={SUBSTACK_URL} target="_blank" rel="noreferrer">writing <ArrowUpRight size={15} /></a><a href="/partnerships">brand collaborations</a><a href="https://instagram.com/veelogg_" target="_blank" rel="noreferrer">instagram <ArrowUpRight size={15} /></a><a href="/contact">contact</a></div>
     <div className="footer-bottom"><p>good ideas deserve to get made.</p><small>© 2026 Veelogg · Varnika Chabria</small></div>
   </footer>;
 }

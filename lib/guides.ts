@@ -9,4 +9,4 @@ export const guides = [
  {slug:"wwdc-2026-business-owners-translation-guide", title:"Apple updates, in business language.", fullTitle:"WWDC 2026: the business owner’s translation guide", description:"Varnika’s guide to Apple’s 2026 announcements and what they mean for business discovery.", category:"websites", cover:"tech speak,\ntranslated.", theme:"paper", icon:"website", date:"2026-06-10"},
 ];
 export type Guide = (typeof guides)[number];
-export const guideUrl=(slug:string)=>"https://www.veelogg.com/guides/"+slug;
+export const guideUrl=(slug:string)=>"/guides/"+slug;
